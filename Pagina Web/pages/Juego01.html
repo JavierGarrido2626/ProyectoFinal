@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png"  href="../images/LOGO_MEJORADO-removebg-preview.png">
     <link rel="stylesheet" type="text/css" href="../CSS/style.css">
-    <script src="./js/script.js"></script>
+    <script src="../JS/script.js" defer></script>
 
     <title>Juego01</title>
 </head>
@@ -26,10 +26,13 @@
                     <br>
                     <p>Recuerdos Vivos, Momentos Compartidos</p>
                 </div>
-                <a href="../Index.html">Inicio</a>
-                <a href="../pages/Juego02.html">Juego02</a>
-                <a href="../pages/Juego03.html">Juego03</a>
-                <a href="../pages/Juego04.html">Juego04</a>
+                <nav>
+                    <a href="../Index.html">Inicio</a>
+                    <a href="../pages/Juego02.html">Juego02</a>
+                    <a href="../pages/Juego03.html">Juego03</a>
+                    <a href="../pages/Juego04.html">Juego04</a>
+                </nav>
+              
             </div>
         </header>
 
@@ -78,9 +81,23 @@
         </section>
 
 
-        <div class="SectionJuego01Boton">  <button>Empezar</button></div>
+        <div class="SectionJuego01Boton">  
+            <button id="botonEmpezar">Empezar</button>
+            <button id="botonReiniciar">Reiniciar</button>
+
+            <p id="intentosRestantes">Intentos restantes: 0</p>
+        
+            <div id="niveles" style="display:none;">
+                <button class="nivel" data-nivel="facil">Fácil</button>
+                <button class="nivel" data-nivel="medio">Medio</button>
+                <button class="nivel" data-nivel="dificil">Difícil</button>
+            </div>
+
+        </div>
 
 
+
+        
 
         <footer>
 

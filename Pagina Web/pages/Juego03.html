@@ -1,63 +1,72 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../CSS/style.css">
-    <link rel="icon" type="image/png"  href="../images/LOGO_MEJORADO-removebg-preview.png">
+    <link rel="icon" type="image/png" href="../images/LOGO_MEJORADO-removebg-preview.png">
     <script src="../JS/script.js" defer></script>
 
     <title>Juego de Trabalenguas</title>
 </head>
+
 <body>
 
     <header>
         <!-- Contenedor para guardar dos div-->
 
+        <div>
+            <!-- Primer DIV PARA USAR DE FONDO UNA IMAGEN-->
             <div>
-                        <!-- Primer DIV PARA USAR DE FONDO UNA IMAGEN-->
-                <div>
-                    
-                </div>
-                        <!-- Segundo DIV PARA EL ESLOGAN-->
-                <div>
-                    <p>Memoria Compartida</p>
-                    <br>
-                    <p>Recuerdos Vivos, Momentos Compartidos</p>
-                </div>
+
+            </div>
+            <!-- Segundo DIV PARA EL ESLOGAN-->
+            <div>
+                <p>Memoria Compartida</p>
+                <br>
+                <p>Recuerdos Vivos, Momentos Compartidos</p>
+            </div>
+            <nav>
                 <a href="../Index.html">Inicio</a>
                 <a href="../pages/Juego01.html">Juego01</a>
                 <a href="../pages/Juego02.html">Juego02</a>
                 <a href="../pages/Juego04.html">Juego04</a>
-            </div>
-        </header>
+            </nav>
+           
+        </div>
+    </header>
 
     <section class="SectionJuegoTrabalenguas">
 
         <h1>JUEGO 03-Trabalenguas</h1>
 
 
-        <div class="DivSectionTrabalenguas" id="contenedor-trabalenguas" >
+        <div class="DivSectionTrabalenguas" id="contenedor-trabalenguas">
             <div class="DivBoxTrabalenguas">
                 <p>PULSA EL BOTON PARA EMPEZAR</p>
             </div>
         </div>
     </section>
 
-  <div class="SectionJuego01Boton">
-    <button id="botonEmpezar">Empezar</button>
-
-    <div id="niveles" style="display:none;">
-        <button class="nivel"  data-nivel="facil">Fácil</button>
-        <button class="nivel"  data-nivel="medio">Medio</button>
-        <button class="nivel"  data-nivel="dificil">Difícil</button>
+    <div class="SectionJuego01Boton">
+        <button id="botonEmpezar">Empezar</button>
+        <button id="botonTiempo">Parar</button>
+        <p id="tiempo">Tiempo:</p>
+        <div id="niveles" style="display:none;">
+            <button class="nivel" data-nivel="facil">Fácil</button>
+            <button class="nivel" data-nivel="medio">Medio</button>
+            <button class="nivel" data-nivel="dificil">Difícil</button>
+        </div>
     </div>
-</div>
 
     <footer>
         <p><strong>Créditos:</strong> Javier Garrido García.</p>
-        <p>Mi misión es proporcionar recursos y apoyo a personas afectadas por el Alzheimer y sus cuidadores o familia.</p>
-        <p>Para más información, visita: <a href="https://www.ceafa.es">CEAFA</a> | <a href="https://www.mayoclinic.org/es-es">Mayo Clinic</a></p>
+        <p>Mi misión es proporcionar recursos y apoyo a personas afectadas por el Alzheimer y sus cuidadores o familia.
+        </p>
+        <p>Para más información, visita: <a href="https://www.ceafa.es">CEAFA</a> | <a
+                href="https://www.mayoclinic.org/es-es">Mayo Clinic</a></p>
     </footer>
 </body>
+
 </html>

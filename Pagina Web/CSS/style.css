@@ -1,7 +1,4 @@
-
-
-
-                            /*_________________********************************* Parte Entera para todas las páginas.*********************************_________________*/
+/*_________________********************************* Parte Entera para todas las páginas.*********************************_________________*/
 
 
 /*  Cambia la fuente de la página. */
@@ -11,7 +8,7 @@
 }
 
 /*    Se pone la fuente  a toda la página.*/
-*{
+* {
     font-family: 'Montserrat';
 
 }
@@ -25,7 +22,7 @@ body {
 
 
 
-                            /*_________________********************************* HEADER DE LAS PÁGINAS*********************************_________________*/
+/*_________________********************************* HEADER DE LAS PÁGINAS*********************************_________________*/
 
 
 
@@ -40,13 +37,25 @@ header {
 
 /* Hace referencia a los enlaces de la cabecera*/
 
-header a {
+header nav  {
     color: #ffffff;
     padding-left: 60px;
     padding-top: 38px;
     font-size: 25px;
     text-decoration: none;
 }
+
+
+header nav a  {
+    color: #ffffff;
+    padding-left: 45px;
+    padding-top: 38px;
+    font-size: 25px;
+    text-decoration: none;
+}
+
+
+
 
 /* Hace referencia a los divs de la cabecera donde guarda los otros dos */
 
@@ -72,6 +81,7 @@ header>div:first-child div:first-child {
     width: 200px;
     padding-left: 55px;
 }
+
 /* Hace referencia al segundo div del primero de la cabecera*/
 
 header>div:first-child div:nth-child(2) {
@@ -106,7 +116,7 @@ header>div:first-child div:nth-child(2) p {
 
 
 
-                            /*_________________********************************* SECTION COMÚN*********************************_________________*/
+/*_________________********************************* SECTION COMÚN*********************************_________________*/
 
 
 
@@ -120,6 +130,7 @@ section {
     padding-top: 25px;
     padding-bottom: 25px;
 }
+
 /* Hace referencia al div del section*/
 
 section div {
@@ -129,6 +140,7 @@ section div {
     justify-content: space-between;
     align-items: center;
 }
+
 /* Hace referencia a los enlaces del section*/
 
 section div a {
@@ -141,7 +153,7 @@ section div a {
 }
 
 
-                     /*_________________********************************* CONTENEDOR DEL SECTION PARA EL INDEX*********************************_________________*/
+/*_________________********************************* CONTENEDOR DEL SECTION PARA EL INDEX*********************************_________________*/
 
 
 
@@ -233,7 +245,7 @@ section div a {
 
 
 
-                            /*_________________********************************* Parte del footer*********************************_________________*/
+/*_________________********************************* Parte del footer*********************************_________________*/
 
 
 
@@ -241,8 +253,8 @@ section div a {
 /* Hace referencia al footer es común para todos.*/
 
 footer {
-    background-color: #34495e; 
-    color: #ecf0f1; 
+    background-color: #34495e;
+    color: #ecf0f1;
     padding-top: 25px;
     padding-bottom: 25px;
     text-align: center;
@@ -252,9 +264,9 @@ footer {
 
 /* Hace referencia a los enlaces del footer*/
 
-footer a{
+footer a {
 
-    color: #3498db;  
+    color: #3498db;
     text-decoration: none;
 }
 
@@ -264,7 +276,7 @@ footer a:hover {
     color: #1abc9c;
 }
 
-                            /*_________________********************************* Parte del primer juego*********************************_________________*/
+/*_________________********************************* Parte del primer juego*********************************_________________*/
 
 
 
@@ -278,15 +290,15 @@ footer a:hover {
     margin: 0 auto;
     color: white;
     padding-bottom: 5px;
-    background-color: #f7f7f7; 
+    background-color: #f7f7f7;
 
 }
 
 /* Hace referencia al titulo del juego.*/
 
-.SectionJuego01  h1 {
+.SectionJuego01 h1 {
     text-align: center;
-    color: #2c3e50; 
+    color: #2c3e50;
     font-weight: bold;
 
 }
@@ -297,7 +309,7 @@ footer a:hover {
 .SectionJuego01 div {
     height: 900px;
     margin: 25px;
-    background-color: #f7f7f7; 
+    background-color: #f7f7f7;
 }
 
 
@@ -321,20 +333,26 @@ footer a:hover {
     height: 85%;
     width: 50%;
     align-items: center;
-    background-color: rgb(255, 228, 173); 
+    background-color: rgb(255, 228, 173);
 
 
-    border: 5px solid  #1abc9c;
+    border: 5px solid #1abc9c;
     border-radius: 15px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    
 
+
+    /*.......................*/
+    background-size: cover;
+    background-position: center;
+    transition: background-image 0.5s ease, background-color 0.5s ease;
 }
+
+
 
 /*Se usa el hover para cambiar el color del borde.*/
 
 .DivGridJuego01 div:hover {
-    border-color: #2980b9; 
+    border-color: #2980b9;
 }
 
 
@@ -425,8 +443,8 @@ footer a:hover {
 
 .SectionJuego01Boton {
 
-    height: 150px;
-    background-color: #f7f7f7; 
+    height: 280px;
+    background-color: #f7f7f7;
     text-align: center;
     align-items: center;
 
@@ -439,7 +457,7 @@ footer a:hover {
 .SectionJuego01Boton button {
 
     margin-top: 15px;
-    background-color: #3498db; 
+    background-color: #3498db;
     color: #ffffff;
     border: none;
 
@@ -452,6 +470,16 @@ footer a:hover {
 
 
 }
+
+
+.SectionJuego01Boton p {
+
+    font-size: 35px;
+    color: #2c3e50;
+
+}
+
+
 /* Cambia el background del boton , se quita el borde ...*/
 
 .SectionJuego01Boton button:hover {
@@ -467,7 +495,7 @@ footer a:hover {
 
 
 
-                            /*_________________********************************* Parte del segundo juego*********************************_________________*/
+/*_________________********************************* Parte del segundo juego*********************************_________________*/
 
 
 
@@ -475,7 +503,7 @@ footer a:hover {
 /* Hace referencia al section del juego02.*/
 
 .SectionJuego02 {
-    background-color: rgb(240, 230, 210); 
+    background-color: rgb(240, 230, 210);
     margin: 0;
 
 
@@ -485,7 +513,7 @@ footer a:hover {
 
 .SectionJuego02 h1 {
     text-align: center;
-    color: rgb(47, 79, 79); 
+    color: rgb(47, 79, 79);
     padding-top: 10px;
     padding-bottom: 15px;
     margin: 0;
@@ -524,12 +552,12 @@ footer a:hover {
 .DivBoxSectionJuego02 {
     width: 500px;
     height: 350px;
-    background-color: rgb(245, 245, 220); 
+    background-color: rgb(245, 245, 220);
     display: flex;
     justify-content: center;
     align-items: center;
     border: 5px solid black;
-    border-color: rgb(105, 105, 105); 
+    border-color: rgb(105, 105, 105);
     border-radius: 12px;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
     margin: 5px;
@@ -539,8 +567,8 @@ footer a:hover {
 /* Se hace mas grande si se pasa por encima del div*/
 
 .DivBoxSectionJuego02:hover {
-  cursor: pointer;
-  transform: scale(1.02);  
+    cursor: pointer;
+    transform: scale(1.02);
 
 }
 
@@ -550,7 +578,7 @@ footer a:hover {
 
 .contadores {
     text-align: center;
-    margin: 20px 0; 
+    margin: 20px 0;
 }
 
 .contadores p {
@@ -562,7 +590,7 @@ footer a:hover {
 /* Esta clase es importante ya que se utiliza tambien en el js para que cambie el color cuando se esta jugando*/
 
 .activo {
-    background-color: green;  
+    background-color: green;
     transition: background-color 0.3s;
 }
 
@@ -571,7 +599,7 @@ footer a:hover {
 
 
 
-                            /*_________________********************************* Parte del tercer juego*********************************_________________*/
+/*_________________********************************* Parte del tercer juego*********************************_________________*/
 
 
 /* Hace referencia al Section del trabalenguas.*/
@@ -581,20 +609,20 @@ footer a:hover {
     flex-direction: column;
     align-items: center;
     margin: 0;
-    background-color: rgb(245, 245, 220); 
+    background-color: rgb(245, 245, 220);
 }
 
 /* Hace referencia al titulo del trabalenguas.*/
 
-.SectionJuegoTrabalenguas h1{
-    color: rgb(128, 64, 0); 
+.SectionJuegoTrabalenguas h1 {
+    color: rgb(128, 64, 0);
 }
 
 /* Hace referencia al div del trabalenguas.*/
 .DivBoxTrabalenguas {
     width: 400px;
     height: 250px;
-    background-color: rgb(222, 184, 135); 
+    background-color: rgb(222, 184, 135);
     border: 2px solid #000;
     display: flex;
     flex-direction: column;
@@ -604,27 +632,78 @@ footer a:hover {
     text-align: center;
     padding: 10px;
     font-size: 25px;
-    color: rgb(51, 25, 0); 
+    color: rgb(51, 25, 0);
 }
-/* Hace referencia al boton del juego03.*/
 
-.SectionJuegoBoton {
-    text-align: center;
-    margin: 20px 0;
+
+
+
+/*_________________********************************* Parte de la pagina del juego04*********************************_________________*/
+/* Estilos de la cuadricula del juego */
+.cuadriculajuego {
+    display: grid;
+    grid-template-columns: repeat(3, 200px);
+    grid-gap: 20px;
+    justify-content: center;
+    margin-bottom: 30px;
 }
-/* Hace referencia al boton del juego03.*/
 
-.SectionJuegoBoton button {
-    background-color: #4CAF50;
+.cajajuego {
+    width: 200px;
+    height: 200px;
+    background-color: beige;
+    border: 4px solid #000000;
+    border-radius: 10px;
+}
+
+/* Fila de botones de contar */
+.filabotones {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.filabotones button {
+    margin: 25px;
+    background-color: #5494cf;
     color: white;
-    padding: 15px 32px;
-    font-size: 16px;
+    padding: 10px 20px;
     border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* Centrar el botón Empezar y el contador */
+.divBotonJuego4 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;  /* Asegura que el botón y el contador se centren juntos */
+    margin-top: 20px;
+}
+
+#botonEmpezar {
+    margin-top: 15px;
+    background-color: #3498db;
+    color: #ffffff;
+    border: none;
+
+
+    padding: 15px 15px;
+    text-align: center;
+    font-size: 25px;
     border-radius: 5px;
     cursor: pointer;
 }
 
-                            /*_________________********************************* Parte de la pagina del juego04*********************************_________________*/
+/* Centrar el contador debajo del botón */
+#contador {
+    font-size: 20px;
+    font-weight: bold;
+    color: #175a98;
+    text-align: center;
+}
 
 
 
@@ -635,23 +714,17 @@ footer a:hover {
 
 
 
-
-
-
-
-
-
-                            /*_________________********************************* Parte de la pagina informacion*********************************_________________*/
+/*_________________********************************* Parte de la pagina informacion*********************************_________________*/
 
 /* Hace referencia al section de la pagina de explicación.*/
 
 .SectionInformacion {
     display: flex;
     flex-direction: row;
-    justify-content: center;    
+    justify-content: center;
     align-items: center;
     margin: 0;
-    background-color: #f5f5f5; 
+    background-color: #f5f5f5;
     height: 600px;
 }
 
@@ -659,10 +732,10 @@ footer a:hover {
 
 .SectionInformacion div {
     display: flex;
-    justify-content: center; 
-    align-items: center; 
-    border: 4px solid #ffffff; 
-    border-radius: 15px; 
+    justify-content: center;
+    align-items: center;
+    border: 4px solid #ffffff;
+    border-radius: 15px;
     width: 800px;
     height: 600px;
     text-align: center;
@@ -677,46 +750,47 @@ footer a:hover {
 
 .SectionInformacion div:nth-child(1) div {
     display: flex;
-    justify-content: center; 
-    align-items: flex-start; 
+    justify-content: center;
+    align-items: flex-start;
     width: 400px;
     height: 500px;
 
-    background-color: #f9eae1; 
-    border: 1px solid #e0ddd9; 
+    background-color: #f9eae1;
+    border: 1px solid #e0ddd9;
 
 
-    border-radius: 80%; 
+    border-radius: 80%;
     text-align: center;
-    overflow: hidden; 
+    overflow: hidden;
     padding: 20px;
 
 
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1); 
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
 
 }
+
 /* Hace referencia al parrafo del primer div de la pagina de explicación.*/
 
 .SectionInformacion div:nth-child(1) div p {
     margin: 0;
     padding: 0;
     line-height: 1.2;
-    color: #2c3e50; 
+    color: #2c3e50;
 }
 
 
 /* Hace referencia al primer div de la pagina de explicación.*/
 
 .SectionInformacion :first-child div {
-   
 
-    
+
+
     width: 50%;
     height: 80%;
-    
+
     border-radius: 50%;
     background-color: rgba(218, 213, 213, 0.877);
-  
+
     color: #2c3e50;
     font-size: 25px;
 
@@ -726,8 +800,8 @@ footer a:hover {
 
 
 .SectionInformacion div:nth-child(2) {
-    color: #2c3e50; 
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1); 
+    color: #2c3e50;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
 
     width: 450px;
     margin-left: 150px;
@@ -745,9 +819,11 @@ footer a:hover {
     display: flex;
     flex-direction: column;
 }
+
 /* Hace referencia al segundo parrafo y titulo del segundo div de la pagina de explicación.*/
 
-.SectionInformacion div:nth-child(2) p:nth-child(2) p , h1 {
+.SectionInformacion div:nth-child(2) p:nth-child(2) p,
+h1 {
     margin: 0;
 }
 
@@ -755,32 +831,32 @@ footer a:hover {
 
 
 
-                            /*_________________********************************* Parte de la pagina de explicacion juego*********************************_________________*/
+/*_________________********************************* Parte de la pagina de explicacion juego*********************************_________________*/
 
 
 
-/* Hace referencia al Section de la pagina de explicación del juego.*/                            
+/* Hace referencia al Section de la pagina de explicación del juego.*/
 .SectionExplicacionJuego {
     margin: 0;
     height: 1600px;
-    background-color: #f0f4f8; 
+    background-color: #f0f4f8;
 }
 
 /* Hace referencia al Section01 de la pagina de explicación del juego.
     hay un div para cada juego y su explicación.
-*/                            
+*/
 .SectionExplicacionJuego01 {
     display: flex;
     background-color: #f0f4f8;
     justify-content: space-between;
-    gap: 150px; 
-    padding: 20px; 
+    gap: 150px;
+    padding: 20px;
 }
 
 
 /* Hace referencia al primer div de la pagina de explicación del juego.
     Donde se pone la imagen del juego
-*/                            
+*/
 
 .SectionExplicacionJuego01 div:first-child {
     width: 300px;
@@ -795,22 +871,23 @@ footer a:hover {
     border: 7px solid brown;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    
+
 
 }
+
 /* Hace referencia al  div de la pagina de explicación del juego.
     Donde se pone la explicación del juego.
-*/  
+*/
 .SectionExplicacionJuego01 div:nth-child(2) {
 
 
     background-color: #f0f0f5;
     width: 500px;
     height: 350px;
-    flex-grow: 2; 
+    flex-grow: 2;
 
 
-    border: 5px solid #34495e; 
+    border: 5px solid #34495e;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
@@ -818,13 +895,13 @@ footer a:hover {
 
 /* Hace referencia al  div de la pagina de explicación del juego.
     Donde se modifica el parrafo y el Strong.
-*/  
+*/
 .SectionExplicacionJuego01 p {
-    color: #2c3e50; 
-    font-size: 18px; 
+    color: #2c3e50;
+    font-size: 18px;
     line-height: 1.6;
-    text-align: justify; 
-    font-family: 'Arial', sans-serif; 
+    text-align: justify;
+    font-family: 'Arial', sans-serif;
     padding-left: 15px;
 }
 
@@ -834,7 +911,7 @@ footer a:hover {
     font-weight: bold;
     padding-left: 25%;
     padding-right: 25%;
-    color: #2c3e50; 
+    color: #2c3e50;
 }
 
 
@@ -845,23 +922,23 @@ footer a:hover {
 
 .SectionExplicacionJuego02 {
     display: flex;
-    background-color: #f0f4f8; 
+    background-color: #f0f4f8;
     justify-content: space-between;
-    gap: 150px; 
-    padding: 20px; 
+    gap: 150px;
+    padding: 20px;
 }
 
 
 /* Hace referencia al  div de la pagina de explicación del juego.
     Donde se pone la explicación del juego.
-*/  
+*/
 .SectionExplicacionJuego02 div:first-child {
     background-color: #f0f0f5;
     width: 500px;
     height: 350px;
     flex-grow: 2;
 
-    border: 5px solid #34495e; 
+    border: 5px solid #34495e;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
@@ -869,15 +946,15 @@ footer a:hover {
 
 /* Hace referencia al primer div de la pagina de explicación del juego.
     Donde se pone la imagen del juego
-*/  
+*/
 
 
 .SectionExplicacionJuego02 div:nth-child(2) {
 
-    background-color: rgb(173, 173, 173); 
+    background-color: rgb(173, 173, 173);
     width: 300px;
     height: 350px;
-    flex-grow: 1; 
+    flex-grow: 1;
 
     background-image: url(../images/JuegoTrabalenguas.png);
     background-repeat: no-repeat;
@@ -885,7 +962,7 @@ footer a:hover {
     background-position: center;
 
 
-    
+
     border: 7px solid brown;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -894,13 +971,13 @@ footer a:hover {
 
 /* Hace referencia al  div de la pagina de explicación del juego.
     Donde se modifica el parrafo y el Strong.
-*/  
+*/
 .SectionExplicacionJuego02 p {
-    color: #2c3e50; 
-    font-size: 18px; 
-    line-height: 1.6; 
+    color: #2c3e50;
+    font-size: 18px;
+    line-height: 1.6;
     text-align: justify;
-    font-family: 'Arial', sans-serif; 
+    font-family: 'Arial', sans-serif;
     padding-left: 15px;
 }
 
@@ -910,7 +987,7 @@ footer a:hover {
     font-weight: bold;
     padding-left: 25%;
     padding-right: 25%;
-    color: #2c3e50; 
+    color: #2c3e50;
 }
 
 
@@ -919,17 +996,17 @@ footer a:hover {
 
 .SectionExplicacionJuego03 {
     display: flex;
-    background-color: #f0f4f8; 
+    background-color: #f0f4f8;
     justify-content: space-between;
-    gap: 150px; 
-    padding: 20px; 
+    gap: 150px;
+    padding: 20px;
 }
 
 
 
 /* Hace referencia al primer div de la pagina de explicación del juego.
     Donde se pone la imagen del juego
-*/  
+*/
 .SectionExplicacionJuego03 div:first-child {
     width: 300px;
     height: 350px;
@@ -943,7 +1020,7 @@ footer a:hover {
     background-position: center;
 
 
-    
+
     border: 7px solid brown;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -952,13 +1029,13 @@ footer a:hover {
 
 /* Hace referencia al  div de la pagina de explicación del juego.
     Donde se modifica el parrafo y el Strong.
-*/  
+*/
 
 .SectionExplicacionJuego03 p {
-    color: #2c3e50; 
-    font-size: 18px; 
-    line-height: 1.6; 
-    text-align: justify; 
+    color: #2c3e50;
+    font-size: 18px;
+    line-height: 1.6;
+    text-align: justify;
     padding-left: 15px;
 }
 
@@ -968,7 +1045,7 @@ footer a:hover {
     font-weight: bold;
     padding-left: 25%;
     padding-right: 25%;
-    color: #2c3e50; 
+    color: #2c3e50;
 }
 
 
@@ -976,15 +1053,15 @@ footer a:hover {
 
 /* Hace referencia al  div de la pagina de explicación del juego.
     Donde se pone la explicación del juego.
-*/  
+*/
 .SectionExplicacionJuego03 div:nth-child(2) {
 
     background-color: #f0f0f5;
     width: 500px;
     height: 350px;
-    flex-grow: 2; 
+    flex-grow: 2;
 
-    border: 5px solid #34495e; 
+    border: 5px solid #34495e;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
@@ -996,14 +1073,15 @@ footer a:hover {
 .SectionExplicacionJuego04 {
 
     display: flex;
-    background-color: #f0f4f8; 
+    background-color: #f0f4f8;
     justify-content: space-between;
-    gap: 150px; 
-    padding: 20px; 
+    gap: 150px;
+    padding: 20px;
 }
+
 /* Hace referencia al  div de la pagina de explicación del juego.
     Donde se pone la explicación del juego.
-*/  
+*/
 .SectionExplicacionJuego04 div:first-child {
     background-color: #f0f0f5;
 
@@ -1011,7 +1089,7 @@ footer a:hover {
     height: 350px;
     flex-grow: 2;
 
-    border: 5px solid #34495e; 
+    border: 5px solid #34495e;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -1019,20 +1097,20 @@ footer a:hover {
 
 /* Hace referencia al primer div de la pagina de explicación del juego.
     Donde se pone la imagen del juego
-*/  
+*/
 .SectionExplicacionJuego04 div:nth-child(2) {
 
-    background-color: rgb(173, 173, 173); 
+    background-color: rgb(173, 173, 173);
     width: 300px;
     height: 350px;
-    flex-grow: 1; 
+    flex-grow: 1;
 
     background-image: url(../images/JuegoContarObjetos.png);
 
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    
+
     border: 7px solid brown;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -1042,12 +1120,12 @@ footer a:hover {
 
 /* Hace referencia al  div de la pagina de explicación del juego.
     Donde se modifica el parrafo y el Strong.
-*/  
+*/
 .SectionExplicacionJuego04 p {
-    color: #2c3e50; 
-    font-size: 18px; 
-    line-height: 1.6; 
-    text-align: justify; 
+    color: #2c3e50;
+    font-size: 18px;
+    line-height: 1.6;
+    text-align: justify;
     padding-left: 15px;
 }
 
@@ -1057,7 +1135,7 @@ footer a:hover {
     font-weight: bold;
     padding-left: 25%;
     padding-right: 25%;
-    color: #2c3e50; 
+    color: #2c3e50;
 }
 
 
@@ -1065,17 +1143,17 @@ footer a:hover {
 
 .SectionJuego04Boton {
     height: 80px;
-    background-color: #f7f7f7; 
+    background-color: #f7f7f7;
     text-align: center;
     align-items: center;
-    display: flex; 
-    justify-content: center; 
+    display: flex;
+    justify-content: center;
 }
 
 .SectionJuego04Boton button {
-    margin: 0 14%; 
+    margin: 0 14%;
     background-color: #3498db;
-    color: #ffffff; 
+    color: #ffffff;
     border: none;
     padding: 15px 15px;
     text-align: center;
@@ -1087,87 +1165,87 @@ footer a:hover {
 
 
 
-                            /*_________________********************************* Parte de la pagina modo relajante*********************************_________________*/
+/*_________________********************************* Parte de la pagina modo relajante*********************************_________________*/
 
 
 
-/* Hace referencia al  section de la pagina de modo relajante*/  
+/* Hace referencia al  section de la pagina de modo relajante*/
 .SectionModoRelajante {
     margin: 0;
     height: 600px;
     display: flex;
-    justify-content: center; 
-  }
+    justify-content: center;
+}
 
 
-  /* Hace referencia al  div de la pagina de modo relajante*/  
+/* Hace referencia al  div de la pagina de modo relajante*/
 
-  .SectionModoRelajante div {
-    margin: 10px; 
-  }
-
-
-
-/* Hace referencia al primer div de la pagina de modo relajante*/  
- 
-  .SectionModoRelajante div:first-child {
-    width: 50%;
-    display: flex;
-    flex-direction: column; 
-    justify-content: center; 
-    align-items: center; 
-  }
-
-
-/* Hace referencia al  section de la pagina de modo relajante*/  
-
-.SectionModoRelajante {
-    background-color: #f0f4f8; 
-    margin: 0;
-    height: 600px;
-    display: flex;
-    justify-content: center; 
-  }
-  
+.SectionModoRelajante div {
+    margin: 10px;
+}
 
 
 
-  /* Hace referencia al primer div del section*/  
+/* Hace referencia al primer div de la pagina de modo relajante*/
 
 .SectionModoRelajante div:first-child {
-    background-color:#34495e;
     width: 50%;
     display: flex;
-    flex-direction: column; 
-    justify-content: center; 
-    align-items: center; 
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* Hace referencia al  section de la pagina de modo relajante*/
+
+.SectionModoRelajante {
+    background-color: #f0f4f8;
+    margin: 0;
+    height: 600px;
+    display: flex;
+    justify-content: center;
+}
+
+
+
+
+/* Hace referencia al primer div del section*/
+
+.SectionModoRelajante div:first-child {
+    background-color: #34495e;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
     border-radius: 25px;
-  }
+}
 
 
 
-/* Hace referencia al parrafo del primer div del section*/  
+/* Hace referencia al parrafo del primer div del section*/
 
-  .SectionModoRelajante div:first-child  p {
+.SectionModoRelajante div:first-child p {
     color: #ffffff;
     font-size: 30px;
     text-align: center;
-  }
+}
 
 
-  
 
-/* Hace referencia a los botones de esta pagina*/  
+
+/* Hace referencia a los botones de esta pagina*/
 
 .botones {
-    display: flex; 
-    justify-content: space-around; 
-    width: 100%; 
-    margin: 20px 0; 
-  }
-  
-.boton-sonido {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin: 20px 0;
+}
+
+.boton-sonido-olas {
     background-color: #66c2ff;
     border: none;
     border-radius: 10px;
@@ -1177,14 +1255,35 @@ footer a:hover {
     cursor: pointer;
     transition: background-color 0.3s;
 }
-  
-.boton-sonido:hover {
-    background-color: #0084cc;
+
+
+.boton-sonido-bosque {
+    background-color: #66c2ff;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    padding: 10px 20px;
+    font-size: 45px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+
+.boton-sonido-lluvia {
+    background-color: #66c2ff;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    padding: 10px 20px;
+    font-size: 45px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 
 
 
 
-
-
+.boton-sonido:hover {
+    background-color: #0084cc;
+}
