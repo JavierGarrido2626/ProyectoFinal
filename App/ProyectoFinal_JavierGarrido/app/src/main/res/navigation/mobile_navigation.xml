@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.proyectofinal_javiergarrido.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_ubi"
+        android:name="com.example.proyectofinal_javiergarrido.ui.ubi.UbiFragment"
+        android:label="@string/menu_ubi"
+        tools:layout="@layout/fragment_ubi" />
+
+    <fragment
+        android:id="@+id/nav_manual"
+        android:name="com.example.proyectofinal_javiergarrido.ui.manual.ManualFragment"
+        android:label="@string/menu_manual"
+        tools:layout="@layout/fragment_manual" />
+
+    <fragment
+        android:id="@+id/diarioFragment"
+        android:name="com.example.proyectofinal_javiergarrido.ui.diario.DiarioFragment"
+        android:label="Diario"
+        tools:layout="@layout/fragment_diario" />
+
+
+</navigation>
