@@ -92,6 +92,17 @@ header>div:first-child div:nth-child(2) {
 }
 
 
+.Login a {
+    padding-top: 35px;
+    padding-left: 200px;
+    color: #f39c12;
+    font-size: 25px;
+    text-decoration: none;
+    
+}
+
+
+
 /* Hace referencia al primer p del segundo div de la cabecera
     "EL TITULO"
 */
@@ -1165,125 +1176,155 @@ h1 {
 
 
 
-/*_________________********************************* Parte de la pagina modo relajante*********************************_________________*/
+/*_________________********************************* Parte de la pagina estadísticas (LOGIN) *********************************_________________*/
 
 
 
-/* Hace referencia al  section de la pagina de modo relajante*/
-.SectionModoRelajante {
-    margin: 0;
+.sectionEstadisticas {
     height: 600px;
+    background-color: #f4f1ea;
     display: flex;
-    justify-content: center;
-}
-
-
-/* Hace referencia al  div de la pagina de modo relajante*/
-
-.SectionModoRelajante div {
-    margin: 10px;
-}
-
-
-
-/* Hace referencia al primer div de la pagina de modo relajante*/
-
-.SectionModoRelajante div:first-child {
-    width: 50%;
-    display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-
-/* Hace referencia al  section de la pagina de modo relajante*/
-
-.SectionModoRelajante {
-    background-color: #f0f4f8;
-    margin: 0;
-    height: 600px;
-    display: flex;
-    justify-content: center;
+.sectionEstadisticas div h1 {
+    color: white;
+    margin-bottom: 20px;
 }
 
-
-
-
-/* Hace referencia al primer div del section*/
-
-.SectionModoRelajante div:first-child {
-    background-color: #34495e;
-    width: 50%;
+.sectionEstadisticas > div {
+    width: 600px;
+    height: 550px; 
+    border-radius: 15px;
+    background-color: #2c3e50;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-
-    border-radius: 25px;
+    flex-direction: column;
+    padding: 30px;
 }
 
-
-
-/* Hace referencia al parrafo del primer div del section*/
-
-.SectionModoRelajante div:first-child p {
-    color: #ffffff;
-    font-size: 30px;
-    text-align: center;
-}
-
-
-
-
-/* Hace referencia a los botones de esta pagina*/
-
-.botones {
-    display: flex;
-    justify-content: space-around;
+form {
     width: 100%;
-    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-.boton-sonido-olas {
-    background-color: #66c2ff;
-    border: none;
-    border-radius: 10px;
+.sectionEstadisticas > div > form > div {
+    width: 100%;
+    margin: 15px 0;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #f39c12;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.sectionEstadisticas > div > form > div label {
+    font-size: 14px;
     color: white;
-    padding: 10px 20px;
-    font-size: 45px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+    font-weight: bold;
 }
 
-
-.boton-sonido-bosque {
-    background-color: #66c2ff;
+.sectionEstadisticas > div > form > div input {
+    padding: 10px;
     border: none;
-    border-radius: 10px;
-    color: white;
-    padding: 10px 20px;
-    font-size: 45px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+    border-radius: 8px;
+    font-size: 16px;
+    width: 95%;
+    margin-left: 5px;
 }
 
 
-.boton-sonido-lluvia {
-    background-color: #66c2ff;
+
+.sectionEstadisticas > div > form > div button {
     border: none;
-    border-radius: 10px;
-    color: white;
-    padding: 10px 20px;
-    font-size: 45px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+    border-radius: 8px;
+    font-size: 16px;
+    width: 75%;
+    padding: 10px;
+    background-color: white;
 }
 
 
 
 
 
-.boton-sonido:hover {
-    background-color: #0084cc;
+/*_________________********************************* Parte de la pagina Registrp *********************************_________________*/
+
+
+
+
+.sectionRegistro {
+    height: 600px;
+    background-color: #f4f1ea;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sectionRegistro div h1 {
+    color: white;
+    margin-bottom: 20px;
+}
+
+.sectionRegistro > div {
+    width: 600px;
+    height: 550px; 
+    border-radius: 15px;
+    background-color: #78aee5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 30px;
+}
+
+form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.sectionRegistro > div > form > div {
+    width: 100%;
+    margin: 15px 0;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #483f30;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.sectionRegistro > div > form > div label {
+    font-size: 14px;
+    color: white;
+    font-weight: bold;
+}
+
+.sectionRegistro > div > form > div input {
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    width: 95%;
+    margin-left: 5px;
+}
+
+
+
+.sectionRegistro > div > form > div button {
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    width: 75%;
+    padding: 10px;
+    background-color: white;
 }
