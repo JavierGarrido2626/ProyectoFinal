@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.estadisticas.Trabalenguas.EstadisticasJuegoTrabalenguas">
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#F3E5F5"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:gravity="center">
+
+            <!-- Título de la pantalla -->
+            <TextView
+                android:id="@+id/txtTitulo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Estadísticas del Juego de Trabalenguas"
+                android:textSize="20sp"
+                android:textColor="#800080"
+                android:textStyle="bold"
+                android:padding="16dp"
+                android:gravity="center"
+                android:layout_marginBottom="24dp" />
+
+            <!-- Sección para el modo Fácil -->
+            <TextView
+                android:id="@+id/txtFacil"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="Modo Fácil"
+                android:textColor="#333333"
+                android:textSize="18sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewFacil"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintTop_toBottomOf="@id/txtFacil"
+                android:layout_gravity="center"/>
+
+            <!-- Sección para el modo Medio -->
+            <TextView
+                android:id="@+id/txtMedio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Modo Medio"
+                android:textSize="18sp"
+                android:textColor="#333333"
+                android:layout_marginBottom="8dp"
+                android:padding="8dp"
+                android:gravity="center" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewMedio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_gravity="center" />
+
+            <!-- Sección para el modo Difícil -->
+            <TextView
+                android:id="@+id/txtDificil"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Modo Difícil"
+                android:textSize="18sp"
+                android:textColor="#333333"
+                android:layout_marginBottom="8dp"
+                android:padding="8dp"
+                android:gravity="center" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewDificil"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_gravity="center" />
+
+            <!-- Botón para exportar todos los datos -->
+            <Button
+                android:id="@+id/btnExportar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Exportar Estadísticas"
+                android:textColor="#FFFFFF"
+                android:background="#800080"
+                android:padding="12dp"
+                android:layout_marginTop="24dp"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

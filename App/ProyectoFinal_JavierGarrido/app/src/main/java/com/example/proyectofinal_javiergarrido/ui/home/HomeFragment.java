@@ -20,6 +20,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.Manifest;
+
 import com.example.proyectofinal_javiergarrido.R;
 
 public class HomeFragment extends Fragment {
@@ -36,25 +37,15 @@ public class HomeFragment extends Fragment {
         Button btnLlamada = root.findViewById(R.id.btn_llamadas);
         Button btnAlarma = root.findViewById(R.id.btn_alarmas);
 
-
-
-        btnAlarma.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    Intent intent = new Intent(AlarmClock.ACTION_SHOW_ALARMS);
-                    startActivity(intent);
-                } catch (Exception e) {
-                    // Log y mensaje en caso de error
-                    Log.e("ErrorAlarma", "Error al abrir la aplicación de reloj", e);
-                    Toast.makeText(getContext(), "No se pudo abrir la aplicación del reloj: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
+        btnAlarma.setOnClickListener(v -> {
+            try {
+                Intent intent = new Intent(AlarmClock.ACTION_SHOW_ALARMS);
+                startActivity(intent);
+            } catch (Exception e) {
+                Log.e("ErrorAlarma", "Error al abrir la aplicación de reloj", e);
+                Toast.makeText(getContext(), "No se pudo abrir la aplicación del reloj: " + e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-
-
-
-
 
         btnLlamada.setOnLongClickListener(v -> {
             Intent intent = new Intent(getContext(), IngresarNumeroActivity.class);
@@ -63,13 +54,15 @@ public class HomeFragment extends Fragment {
         });
 
         btnLlamada.setOnClickListener(v -> {
+            Log.d("HomeFragment", "Botón de llamada clicado");
             if (numeroTelefonoGuardado != null && !numeroTelefonoGuardado.isEmpty()) {
                 if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CALL_PHONE)
                         != PackageManager.PERMISSION_GRANTED) {
+                    // Solicitar permiso de llamada si no está otorgado
                     ActivityCompat.requestPermissions(getActivity(),
                             new String[]{Manifest.permission.CALL_PHONE}, SOLICITUD_PERMISO_LLAMADA);
                 } else {
-                    realizarLlamada();
+                    realizarLlamada(); // Realizar la llamada si se tiene el permiso
                 }
             } else {
                 Toast.makeText(getContext(), "Por favor, ingresa un número primero.", Toast.LENGTH_SHORT).show();
@@ -87,7 +80,12 @@ public class HomeFragment extends Fragment {
         String numeroTelefono = "tel:" + numeroTelefonoGuardado;
         Intent intentoLlamada = new Intent(Intent.ACTION_CALL);
         intentoLlamada.setData(Uri.parse(numeroTelefono));
-        startActivity(intentoLlamada);
+        try {
+            startActivity(intentoLlamada);
+        } catch (Exception e) {
+            Log.e("ErrorLlamada", "Error al intentar realizar la llamada", e);
+            Toast.makeText(getContext(), "Error al intentar realizar la llamada: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

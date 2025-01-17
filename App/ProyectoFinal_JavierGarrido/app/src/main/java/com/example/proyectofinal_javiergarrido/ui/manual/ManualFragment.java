@@ -5,23 +5,23 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 
 import com.example.proyectofinal_javiergarrido.MainActivity;
 import com.example.proyectofinal_javiergarrido.R;
 import com.example.proyectofinal_javiergarrido.databinding.FragmentManualBinding;
-
+import com.example.proyectofinal_javiergarrido.ui.diario.DiarioFragment;
+import com.example.proyectofinal_javiergarrido.ui.estadisticas.EstadisticasJuegosInicio;
+import com.example.proyectofinal_javiergarrido.ui.ubi.Ubicacion;
 
 public class ManualFragment extends Fragment {
 
     private FragmentManualBinding binding;
 
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         ManualViewModel manualViewModel =
@@ -30,12 +30,33 @@ public class ManualFragment extends Fragment {
         binding = FragmentManualBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        binding.botonSalidaHome.setOnClickListener(v -> {
+
+        // Botón para ir a Home
+        binding.btnImgHome.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), MainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
-            getActivity().finish();
         });
+
+        // Botón para ir a Ubicaciones
+        binding.btnImgUbicaciones.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), Ubicacion.class);
+            startActivity(intent);
+        });
+
+        // Botón para ir a Diario
+        binding.btnImgDiario.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), DiarioFragment.class);
+            startActivity(intent);
+        });
+
+        // Botón para ir a Estadisticas
+
+        binding.btnImgEstadisticas.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), EstadisticasJuegosInicio.class); // Cambiar por la clase real
+            startActivity(intent);
+        });
+
 
         return root;
     }

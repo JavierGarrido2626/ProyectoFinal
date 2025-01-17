@@ -1,13 +1,14 @@
 package com.example.proyectofinal_javiergarrido;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
@@ -16,49 +17,57 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.proyectofinal_javiergarrido.databinding.ActivityMainBinding;
-import com.example.proyectofinal_javiergarrido.ui.diario.DiarioFragment;
-import com.example.proyectofinal_javiergarrido.ui.diario.Nota;
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private static final int REQUEST_CODE_CREAR_NOTA = 1;
+    private static final String PREFS_NOMBRE = "SesionUsuario";
+    private static final String CLAVE_SESION_INICIADA = "sesionIniciada";
+    private static final String CLAVE_NOMBRE_USUARIO = "nombreUsuario";
+    private static final String CLAVE_ID_USUARIO = "idUsuario";
 
-    private AppBarConfiguration mAppBarConfiguration;
-    private ActivityMainBinding binding;
-    private NavController navController;
+    private AppBarConfiguration configuracionBarraApp;
+    private ActivityMainBinding enlaceBinding;
+    private NavController controladorNavegacion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        if (!sesionIniciada()) {
+            volverALogin();
+            return;
+        }
 
-        setSupportActionBar(binding.appBarMain.toolbar);
-        binding.appBarMain.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null)
-                        .setAnchorView(R.id.fab).show();
-            }
-        });
+        enlaceBinding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(enlaceBinding.getRoot());
 
-        DrawerLayout drawer = binding.drawerLayout;
-        NavigationView navigationView = binding.navView;
+        setSupportActionBar(enlaceBinding.appBarMain.toolbar);
 
-        mAppBarConfiguration = new AppBarConfiguration.Builder(
+        SharedPreferences preferencias = getSharedPreferences(PREFS_NOMBRE, MODE_PRIVATE);
+        String nombreUsuario = preferencias.getString(CLAVE_NOMBRE_USUARIO, "Usuario no disponible");
+
+        NavigationView navigationView = enlaceBinding.navView;
+        View headerView = navigationView.getHeaderView(0);
+        TextView txtNombreUsuario = headerView.findViewById(R.id.txtNombreUsuario);
+
+        if (txtNombreUsuario != null) {
+            txtNombreUsuario.setText(nombreUsuario);
+        }
+
+        DrawerLayout menuLateral = enlaceBinding.drawerLayout;
+        NavigationView vistaNavegacion = enlaceBinding.navView;
+
+        configuracionBarraApp = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.nav_ubi, R.id.nav_manual, R.id.diarioFragment)
-                .setOpenableLayout(drawer)
+                .setOpenableLayout(menuLateral)
                 .build();
 
-        navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-        NavigationUI.setupWithNavController(navigationView, navController);
+        controladorNavegacion = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
+        NavigationUI.setupActionBarWithNavController(this, controladorNavegacion, configuracionBarraApp);
+        NavigationUI.setupWithNavController(vistaNavegacion, controladorNavegacion);
 
-        navigationView.setNavigationItemSelectedListener(this);
+        vistaNavegacion.setNavigationItemSelectedListener(this);
     }
 
     @Override
@@ -68,8 +77,37 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_settings) {
+            Intent intent = new Intent(this, Ajustes.class);
+            startActivity(intent);
+            return true;
+        }
+
+        if (id == R.id.btnCerrarSesion) {
+            cerrarSesion();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private boolean sesionIniciada() {
+        SharedPreferences preferencias = getSharedPreferences(PREFS_NOMBRE, MODE_PRIVATE);
+        return preferencias.getBoolean(CLAVE_SESION_INICIADA, false);
+    }
+
+    private void volverALogin() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
     public boolean onSupportNavigateUp() {
-        return NavigationUI.navigateUp(navController, mAppBarConfiguration) || super.onSupportNavigateUp();
+        return NavigationUI.navigateUp(controladorNavegacion, configuracionBarraApp) || super.onSupportNavigateUp();
     }
 
     @Override
@@ -77,28 +115,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if (id == R.id.nav_diario) {
-            navController.navigate(R.id.diarioFragment);
+            controladorNavegacion.navigate(R.id.diarioFragment);
         } else {
-            NavigationUI.onNavDestinationSelected(item, navController);
+            NavigationUI.onNavDestinationSelected(item, controladorNavegacion);
         }
 
-        DrawerLayout drawer = binding.drawerLayout;
-        drawer.closeDrawers();
+        DrawerLayout menuLateral = enlaceBinding.drawerLayout;
+        menuLateral.closeDrawers();
         return true;
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+    private void cerrarSesion() {
+        SharedPreferences preferencias = getSharedPreferences(PREFS_NOMBRE, MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferencias.edit();
+        editor.putBoolean(CLAVE_SESION_INICIADA, false);
+        editor.apply();
 
-        if (requestCode == REQUEST_CODE_CREAR_NOTA && resultCode == RESULT_OK && data != null) {
-            Nota nuevaNota = (Nota) data.getSerializableExtra("nuevaNota");
-            if (nuevaNota != null) {
-                DiarioFragment diarioFragment = (DiarioFragment) getSupportFragmentManager().findFragmentByTag(DiarioFragment.class.getSimpleName());
-                if (diarioFragment != null) {
-                    diarioFragment.agregarNota(nuevaNota);
-                }
-            }
-        }
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+
+        finish();
     }
 }

@@ -1,41 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools" >
 
-    <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logomejoradomodified"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ProyectoFinal_JavierGarrido"
-        tools:targetApi="31">
-
+        tools:targetApi="31" >
+        <activity
+            android:name=".ui.estadisticas.EstadisticasJuegosInicio"
+            android:exported="false"
+            android:theme="@style/Theme.ProyectoFinal_JavierGarrido" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyD0WR63L_WaVC0yA0HvThiFIInuFpqJ4xc" />
         <activity
             android:name=".CrearNotaActivity"
             android:exported="true" />
-
         <activity
             android:name=".ui.home.IngresarNumeroActivity"
             android:exported="true" />
+        <activity
+            android:name=".ui.ubi.ListaUbiActivity"
+            android:exported="true" />
+        <activity
+            android:name=".RegistroEstadisticas"
+            android:exported="true" />
+        <activity android:name=".LoginActivity" />
+
+        <activity android:name=".ui.estadisticas.EstadisticasJuegoCartas">
+        </activity>
+        <activity android:name=".ui.estadisticas.Trabalenguas.EstadisticasJuegoTrabalenguas" >
+        </activity>
+        <activity android:name=".ui.estadisticas.Colores.EstadisticasJuegoColor" >
+        </activity>
+
+        <activity android:name=".ui.estadisticas.Contar.EstadisticasJuegoContar" >
+        </activity>
+        <activity android:name=".Ajustes" >
+        </activity>
+
+
 
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.ProyectoFinal_JavierGarrido.NoActionBar">
+            android:theme="@style/Theme.ProyectoFinal_JavierGarrido.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>
+
 </manifest>

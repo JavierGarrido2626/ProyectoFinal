@@ -6,4 +6,7 @@
         android:orderInCategory="100"
         android:title="Ajustes"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/btnCerrarSesion"
+        android:title="Cerrar Sesión" />
 </menu>

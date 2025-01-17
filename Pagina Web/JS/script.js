@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     imagenBox1.addEventListener('click', function () {
-        window.location.href = "pages/Juego01.html";
+        window.location.href = "./Juego01.html";
     });
 
     /*---------------------------------------------------------------------------------------------*/
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     imagenBox2.addEventListener('click', function () {
-        window.location.href = "pages/Juego02.html";
+        window.location.href = "./Juego02.html";
     });
 
     /*---------------------------------------------------------------------------------------------*/
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     imagenBox3.addEventListener('click', function () {
-        window.location.href = "pages/Juego03.html";
+        window.location.href = "./Juego03.html";
     });
 
     /*---------------------------------------------------------------------------------------------*/
@@ -60,121 +60,168 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     imagenBox4.addEventListener('click', function () {
-        window.location.href = "pages/Juego04.html";
+        window.location.href = "./Juego04.html";
     });
 });
 
 
 
 
+
 //***************************JUEGO 02***************************//
-
 document.addEventListener('DOMContentLoaded', function () {
-
-    //Se crea las Costantes para el juego como las cajsa el boto y los contadores.
     const cajas = document.querySelectorAll('.DivBoxSectionJuego02');
-    const botonEmpezar = document.getElementById('botonEmpezar');
-    const listaNiveles = document.getElementById('niveles');
     const contadorRondas = document.getElementById('contadorRondas');
     const contadorRondaActual = document.getElementById('contadorRondaActual');
+    const contadorTiempo = document.getElementById('contadorTiempo');
 
-
-    // Se crean las variables 
     let secuencia = [];
     let secuenciaJugador = [];
     let nivelActual = 0;
     let velocidad = 1000;
-    let juegoTerminado = false;  
+    let juegoTerminado = false;
     let mostrandoSecuencia = false;
+    let tiempo = 0;
+    let intervaloTiempo;
 
+    let nivelSeleccionado = ""; 
+    const idUsuario = localStorage.getItem('id_usuario'); 
 
-    // Función click para que funcione el botón empezar.
-    botonEmpezar.addEventListener('click', () => {
-        listaNiveles.style.display = 'block';
-    });
-
-    // Se permite pulsar los botones de niveles.
+    // Asignar un nivel cuando el usuario hace clic en un nivel
     document.querySelectorAll('.nivel').forEach(boton => {
         boton.addEventListener('click', (evento) => {
+            // Asignar la velocidad y el nivel seleccionado
             velocidad = parseInt(evento.target.dataset.velocidad);
-            listaNiveles.style.display = 'none';
+            nivelSeleccionado = evento.target.dataset.nivel.toLowerCase(); 
+
+            // Iniciar el juego
             iniciarJuego();
         });
     });
 
-    //Se resetean las variables.
+    // Función para iniciar el juego
     function iniciarJuego() {
         secuencia = [];
         secuenciaJugador = [];
         nivelActual = 0;
-        juegoTerminado = false;  
-        contadorRondas.textContent = "Rondas Completadas: 0";  
-        contadorRondaActual.textContent = "Ronda Actual: 0";    
+        juegoTerminado = false;
+        tiempo = 0;
+        clearInterval(intervaloTiempo);
+        contadorRondas.textContent = "Rondas Completadas: 0";
+        contadorRondaActual.textContent = "Ronda Actual: 0";
+        contadorTiempo.textContent = "Tiempo: 0 segundos";
+
+        // Iniciar el contador de tiempo
+        intervaloTiempo = setInterval(() => {
+            tiempo++;
+            contadorTiempo.textContent = `Tiempo: ${tiempo} segundos`;
+        }, 1000);
+
         siguienteRonda();
     }
-        //Creo esta funcion para poner un numero aleatorio y se recorra para que se coloree la cajas aleatoriomente.
-        function obtenerCajaAleatoria() {
-            const indiceAleatorio = Math.floor(Math.random() * cajas.length);
-            return cajas[indiceAleatorio];
+
+    // Obtener una caja aleatoria para la secuencia
+    function obtenerCajaAleatoria() {
+        const indiceAleatorio = Math.floor(Math.random() * cajas.length);
+        return cajas[indiceAleatorio];
     }
 
-    //Funcion para mostrar la secuencia 
+    // Mostrar la secuencia de botones
     function mostrarSecuencia() {
-        mostrandoSecuencia = true;  
+        mostrandoSecuencia = true;
         let i = 0;
-        
-        const intervalo = setInterval(function() { 
+
+        const intervalo = setInterval(() => {
             const caja = secuencia[i];
             resaltarCaja(caja);
-    
+
             i++;
             if (i >= secuencia.length) {
                 clearInterval(intervalo);
-                mostrandoSecuencia = false;  
+                mostrandoSecuencia = false;
             }
         }, velocidad);
     }
-    
-    //Esta funcion sirve para colorear la caja y usar el color verde en css.
+
+    // Resaltar una caja
     function resaltarCaja(caja) {
         caja.classList.add('activo');
         setTimeout(() => caja.classList.remove('activo'), velocidad / 2);
     }
 
-    // Funcion para pasar la siguiente ronda
+    // Pasar a la siguiente ronda
     function siguienteRonda() {
-        // Comprueba que el juego no ha terminado.
-        if (juegoTerminado) return;  
-        // Se suma el contador.
+        if (juegoTerminado) return;
         nivelActual++;
         secuenciaJugador = [];
         secuencia.push(obtenerCajaAleatoria());
 
-        // Actualiza los contadores
         contadorRondaActual.textContent = "Ronda Actual: " + nivelActual;
         contadorRondas.textContent = "Rondas Completadas: " + (nivelActual - 1);
 
         mostrarSecuencia();
     }
 
-    // Verifica la secuencia del jugador mediante la función click
     cajas.forEach(caja => {
         caja.addEventListener('click', () => {
-            // Si termina el juego ya no puede dar más click
-            if (juegoTerminado || mostrandoSecuencia) return;  
+            if (juegoTerminado || mostrandoSecuencia) return;
+
             secuenciaJugador.push(caja);
             const esCorrecto = secuenciaJugador.every((valor, i) => valor === secuencia[i]);
-            // Comprueba si la caja que se ha hecho click ha sido de la secuencia y si es correcta sigue y si no sale un mensaje.
+
             if (!esCorrecto) {
-                alert('¡Incorrecto! Juego terminado.');
-                juegoTerminado = true;  
+                alert(`¡Incorrecto! Juego terminado. Tiempo total: ${tiempo} segundos`);
+                juegoTerminado = true;
+                clearInterval(intervaloTiempo); 
+
+                // Enviar las estadísticas al servidor
+                enviarEstadisticas(false);
             } else if (secuenciaJugador.length === secuencia.length) {
                 setTimeout(siguienteRonda, 1000);
             }
         });
     });
-});
 
+    // Enviar las estadísticas cuando termine el juego
+    function enviarEstadisticas(exito) {
+        if (!nivelSeleccionado) {
+            alert('Por favor, selecciona un nivel.');
+            return;
+        }
+
+        const estadisticas = {
+            id_intento: 1,
+            id_usuario: idUsuario, 
+            nivel: nivelSeleccionado, 
+            rondas_completadas: nivelActual - 1,
+            ronda_actual: nivelActual,
+            tiempo_total: tiempo
+        };
+
+        console.log('Estadísticas a enviar:', estadisticas);
+
+        fetch('http://localhost:5000/guardar_estadisticas_juegodecolor', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(estadisticas)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Error: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Estadísticas guardadas:', data);
+            alert(`Estadísticas guardadas correctamente.`);
+        })
+        .catch(error => {
+            console.error('Error al guardar estadísticas:', error);
+        });
+    }
+});
 
 
 //**********************Juego03Trabalenguas******************/
@@ -237,7 +284,7 @@ document.addEventListener('DOMContentLoaded', function () {
         return lista[indiceAleatorio];
     }
 
-    // Mostrar el trabalenguas en el contenedor
+    // Mostrar el trabalenguas en el div
     function mostrarTrabalenguasAleatorio() {
         var trabalenguas = obtenerTrabalenguasPorNivel(nivelSeleccionado);
         contenedorTrabalenguas.innerHTML = `
@@ -259,17 +306,55 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Funcion para detener el temporizador.
     botonParar.addEventListener('click', function () {
-        clearInterval(intervaloTiempo);  
+        clearInterval(intervaloTiempo); 
+        alert(`¡Tiempo detenido! Has tardado ${segundos} segundos en completar el trabalenguas.  Se enviaran las estadísticas.`);
+        enviarDatosAJuegoTrabalenguas(idUsuario, nivelSeleccionado, segundos); 
     });
+
+// Almacenar los datos del usuario (simulando un inicio de sesión)
+const idUsuario = localStorage.getItem('id_usuario');; 
+
+// Modificar la función para detener el temporizador y enviar datos
+botonParar.addEventListener('click', function () {
+    clearInterval(intervaloTiempo); 
+    enviarDatosAJuegoTrabalenguas(idUsuario, nivelSeleccionado, segundos);
+});
+
+// Función para enviar datos al backend
+function enviarDatosAJuegoTrabalenguas(idUsuario, nivel, tiempoTotal) {
+    const datos = {
+        id_usuario: idUsuario,
+        nivel: nivel,
+        tiempo_total: tiempoTotal
+    };
+
+    fetch('http://localhost:5000/guardar_estadisticas_trabalenguas', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(datos)
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                console.error(`Error al guardar estadísticas: ${data.error}`);
+            } else {
+                console.log('Estadísticas guardadas correctamente:', data.message);
+            }
+        })
+        .catch(error => console.error('Error al conectar con el backend:', error));
+}
+
+
 });
 
 
 
 
 
-//*****************************JUEGO 01 CARTAS*****************************//
 
-//Se declaran las variables.
+//*****************************JUEGO 01 CARTAS*****************************//
 document.addEventListener('DOMContentLoaded', function () {
     const cartas = document.querySelectorAll('.DivGridJuego01 div');  
     const botonEmpezar = document.getElementById('botonEmpezar');
@@ -284,7 +369,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let paresEncontrados = 0;
     let bloqueado = false;
 
-    // Un Array con las imagens que tengo
+    // Un Array con las imágenes que tengo
     const imagenes = [
         'url(../images/Panda.png)', 'url(../images/Lobo.png)', 
         'url(../images/Gato.png)', 'url(../images/Elefante.png)', 
@@ -293,15 +378,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let paresCartas = [];  
 
-    // Mostrar niveles al hacer clic en el boton empezar
+    // Mostrar niveles al hacer clic en el botón empezar
     botonEmpezar.addEventListener('click', function () {
         listaNiveles.style.display = 'block'; 
     });
-    //Con este boton se reinciie el juego
+
+    // Con este botón se reinicia el juego
     botonReiniciar.addEventListener('click', function () {
         window.location.reload();  
     });
-    //Se selecciona el nivel 
+
+    // Se selecciona el nivel
     document.querySelectorAll('.nivel').forEach(function (boton) {
         boton.addEventListener('click', function (evento) {
             nivelSeleccionado = evento.target.dataset.nivel;
@@ -312,7 +399,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Función para iniciar el juego
     function iniciarJuego() {
-      //Else if para seleccionar el juego con sus intentos 
         if (nivelSeleccionado === "facil") {
             intentos = 4;
             totalPares = 2;
@@ -336,21 +422,16 @@ document.addEventListener('DOMContentLoaded', function () {
     // Función para preparar las cartas pares
     function prepararPares() {
         let pares = [];
-
         for (let i = 0; i < imagenes.length - 1; i++) {
-            //Se añaden dos para que sean pares.
             pares.push(imagenes[i]);
             pares.push(imagenes[i]);  
         }
-
         pares.push(imagenes[imagenes.length - 1]);
-
         return pares;
     }
 
     // Función para mezclar las cartas
     function desordenarCartas() {
-        //Se usa un numero ramdom para ello
         paresCartas = paresCartas.sort(() => Math.random() - 0.5);  
     }
 
@@ -370,33 +451,35 @@ document.addEventListener('DOMContentLoaded', function () {
         this.style.backgroundImage = this.dataset.imagen;
         this.style.backgroundColor = ''; 
         cartasDestapadas.push(this); 
-        //Verifica si es par
         if (cartasDestapadas.length === 2) {
             verificarPareja();  
         }
     }
 
-    // Función para verificar si las dos cartas que se dan la vuelta son par.
+    // Función para verificar si las dos cartas que se dan la vuelta son par
     function verificarPareja() {
-        //Bloque el click
         bloqueado = true;  
         const [carta1, carta2] = cartasDestapadas;
 
         if (carta1.dataset.imagen === carta2.dataset.imagen) {
             paresEncontrados++;  
             if (paresEncontrados === totalPares) {
-                setTimeout(() => alert('¡Ganaste! Has encontrado todos los pares de cartas.'), 500);
+                setTimeout(() => {
+                    alert('¡Ganaste! Has encontrado todos los pares de cartas.');
+                    enviarEstadisticas(true);
+                }, 500);
             }
             resetearCartasDestapadas();  
         } else {
-            //Se resta el intento
             intentos--;  
             intentosRestantes.textContent = `Intentos restantes: ${intentos}`;
             if (intentos === 0) {
-                setTimeout(() => alert('¡Perdiste! Se acabaron los intentos.'), 500);
-                bloquearCartas();
+                setTimeout(() => {
+                    alert('¡Perdiste! Se acabaron los intentos.');
+                    enviarEstadisticas(false);
+                    bloquearCartas();
+                }, 500);
             } else {
-                // Volver a tapar las cartas si no son un pares
                 setTimeout(() => {
                     carta1.style.backgroundImage = 'none';  
                     carta2.style.backgroundImage = 'none';  
@@ -408,19 +491,55 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Función para resetear las cartas dadas las vuelta
+    // Función para resetear las cartas dadas la vuelta
     function resetearCartasDestapadas() {
         cartasDestapadas = [];  
         bloqueado = false;  
     }
 
-    // Bloquear las cartas despues de perder
+    // Bloquear las cartas después de perder
     function bloquearCartas() {
         cartas.forEach(carta => {
             carta.removeEventListener('click', voltearCarta);
         });
     }
+
+    // Función para enviar las estadísticas al servidor
+    function enviarEstadisticas(victoria) {
+        const idUsuario = localStorage.getItem('id_usuario');
+        const nivel = nivelSeleccionado;
+        const intentosRealizados = 10 - intentos;  
+        //Victoria o derrota depemdiendo de 0 o 1
+        const derrota = victoria ? 0 : 1;  
+
+        const datos = {
+            id_usuario: idUsuario,
+            nivel: nivel,
+            intentos_realizados: intentosRealizados,
+            victoria: victoria ? 1 : 0,
+            derrota: derrota
+        };
+
+        fetch('http://localhost:5000/actualizar_estadisticas', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(datos)
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            alert(data.message || 'Estadísticas guardadas correctamente.');
+        })
+        .catch(error => {
+            console.error('Error al guardar estadísticas:', error);
+        });
+    }
 });
+
+
+
 
 
 
@@ -449,8 +568,9 @@ let segundos = 30;
 let intervaloSegundos;
 let cartasDisponibles = [];
 let cajasOcupadas = []; 
+let intervaloFrutas;
 
-// Función que inicia el juego
+// Función que inicia o reinicia el juego
 botonEmpezar.addEventListener('click', iniciarJuego);
 
 // Asigna valores aleatorios a las cartas
@@ -465,22 +585,20 @@ function iniciarJuego() {
         segundos = 30;
         segundosDisplay.textContent = segundos;
 
-        // Se usan emoticonos
         const valores = [
-            '🍌',  // Platano
-            '🍊',  // Naranja
-            '🍉',  // Sandia
-            '🍎'   // Manzana
+            '🍌',  
+            '🍊',  
+            '🍉',  
+            '🍎'   
         ]; 
-
 
         cartas = [...valores]; 
         cartas = cartas.concat(cartas);
         cartasDisponibles = [...cartas]; 
 
-        // Se barejean las cartas con el random
+        // Se barajean las cartas con el random
         cartasDisponibles.sort(() => Math.random() - 0.5);
-        //Se pone las cajas centradas.
+        // Se ponen las cajas centradas.
         cajas.forEach(caja => {
             caja.textContent = ''; 
             caja.style.pointerEvents = 'none'; 
@@ -498,8 +616,15 @@ function iniciarJuego() {
             segundosDisplay.textContent = segundos;
             if (segundos <= 0) {
                 clearInterval(intervaloSegundos);
-                alert('¡Se acabó el tiempo!');
-                reiniciarJuego();
+                clearInterval(intervaloFrutas); 
+                alert('¡Se acabó el tiempo!'); 
+
+                // Desactivar botones de contar
+                botonContarIzquierda.disabled = true;
+                botonContarCentro.disabled = true;
+                botonContarDerecha.disabled = true;
+
+                finalizarJuego();
             }
         }, 1000);
     }
@@ -507,35 +632,27 @@ function iniciarJuego() {
 
 // Mostrar las cartas de manera aleatoria en la cuadrícula
 function mostrarCartaAleatoria() {
-    if (cartasDisponibles.length > 0) {
-        let cajaAleatoria;
-        do {
-            cajaAleatoria = Math.floor(Math.random() * cajas.length); 
-        } while (cajasOcupadas.includes(cajaAleatoria)); 
+    if (segundos > 0) {
+        intervaloFrutas = setInterval(() => {
+            let cajaAleatoria = Math.floor(Math.random() * cajas.length); 
 
-        // Marcamos la caja como ocupada
-        cajasOcupadas.push(cajaAleatoria);
+            // Asignamos el emoticono a la caja
+            const carta = cartasDisponibles[Math.floor(Math.random() * cartasDisponibles.length)]; 
+            cajas[cajaAleatoria].textContent = carta;
 
-        // Asignamos el emoticono a la caja
-        const carta = cartasDisponibles.pop(); 
-        cajas[cajaAleatoria].textContent = carta;
+            // Se pone el emoticono con este tamaño 
+            cajas[cajaAleatoria].style.fontSize = '60px'; 
+            cajas[cajaAleatoria].style.pointerEvents = 'auto';
 
-        // Se pone el emoticono con este tamaño 
-        cajas[cajaAleatoria].style.fontSize = '60px'; 
-        cajas[cajaAleatoria].style.pointerEvents = 'auto';
-
-        // Esperamos 2 segundos y luego quitamos la carta
-        setTimeout(() => {
-            cajas[cajaAleatoria].textContent = ''; 
-            if (cajasOcupadas.length < cajas.length) {
-                mostrarCartaAleatoria(); 
-            }
-        }, 2000); 
+            setTimeout(() => {
+                cajas[cajaAleatoria].textContent = ''; 
+            }, 1000); 
+        }, 1000); 
     }
 }
 
 // Contar las cartas en cada columna
-//Como es una cuadricula empieza en 0 a 8
+// Como es una cuadrícula empieza en 0 a 8
 botonContarIzquierda.addEventListener('click', () => contarCartasEnColumna([0, 3, 6], 'izquierda')); 
 botonContarCentro.addEventListener('click', () => contarCartasEnColumna([1, 4, 7], 'centro')); 
 botonContarDerecha.addEventListener('click', () => contarCartasEnColumna([2, 5, 8], 'derecha')); 
@@ -547,7 +664,13 @@ function contarCartasEnColumna(indices, columna) {
     // Contamos las cartas visibles en las casillas
     indices.forEach(index => {
         if (cajas[index].textContent !== '') { 
-            contadorColumna++;
+            // Comprobamos el tipo de carta y asignamos puntos
+            const carta = cajas[index].textContent;
+            if (carta === '🍌' || carta === '🍊') {
+                contadorColumna += 1;
+            } else if (carta === '🍉' || carta === '🍎') {
+                contadorColumna += 2; 
+            }
         }
     });
 
@@ -556,7 +679,7 @@ function contarCartasEnColumna(indices, columna) {
         contadorIncorrecto = 1;
     }
 
-    // Si la columna tiene carta suma el ocntador
+    // Si la columna tiene carta suma el contador
     if (contadorIncorrecto === 0) {
         contador += contadorColumna;
     } else {
@@ -582,4 +705,48 @@ function reiniciarJuego() {
         caja.style.pointerEvents = 'none'; 
     });
     clearInterval(intervaloSegundos);
+    clearInterval(intervaloFrutas); 
+
+    // Reactivar los botones de contar
+    botonContarIzquierda.disabled = false;
+    botonContarCentro.disabled = false;
+    botonContarDerecha.disabled = false;
+}
+
+// Función para finalizar el juego y enviar los datos
+function finalizarJuego() {
+    // Obtener el ID del usuario almacenado en el localStorage
+    const idUsuario = localStorage.getItem('id_usuario');
+
+    // Si el ID del usuario existe, proceder a enviar los datos
+    if (idUsuario) {
+        enviarDatosAJuegoConteoObjetos(idUsuario, contador);
+    } else {
+        console.log("No se ha encontrado el ID del usuario.");
+    }
+}
+
+// Función para enviar los datos del juego al backend
+function enviarDatosAJuegoConteoObjetos(idUsuario, contadorFinal) {
+    const datos = {
+        id_usuario: idUsuario,
+        contador_final: contadorFinal
+    };
+
+    fetch('http://localhost:5000/guardar_estadisticas_conteoobjetos', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(datos)
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                console.error(`Error al guardar estadísticas: ${data.error}`);
+            } else {
+                console.log('Estadísticas guardadas correctamente:', data.message);
+            }
+        })
+        .catch(error => console.error('Error al conectar con el backend:', error));
 }

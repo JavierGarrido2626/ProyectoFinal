@@ -30,12 +30,13 @@ public class NotaAdapter extends RecyclerView.Adapter<NotaAdapter.NotaViewHolder
 
     static {
         coloresMapa = new HashMap<>();
-        coloresMapa.put("rojo", "#FF0000");
-        coloresMapa.put("verde", "#00FF00");
-        coloresMapa.put("azul", "#0000FF");
-        coloresMapa.put("amarillo", "#FFFF00");
-        coloresMapa.put("magenta", "#FF00FF");
-        coloresMapa.put("cian", "#00FFFF");
+        coloresMapa.put("rojo", "#FF6B6B");
+        coloresMapa.put("verde", "#A5D6A7");
+        coloresMapa.put("azul", "#90CAF9");
+        coloresMapa.put("amarillo", "#FFF59D");
+        coloresMapa.put("rosa", "#F48FB1");
+        coloresMapa.put("cian", "#B2EBF2");
+        coloresMapa.put("blanco", "#FFFFFF");
     }
 
     public NotaAdapter(List<Nota> listaNotas, Context context) {
@@ -59,13 +60,12 @@ public class NotaAdapter extends RecyclerView.Adapter<NotaAdapter.NotaViewHolder
         holder.tvContenido.setText(nota.getContenido());
         holder.tvFecha.setText(nota.getFecha());
 
+        // Aplicar color de fondo según el color seleccionado
         if (nota.getColor() != null && !nota.getColor().isEmpty()) {
             String colorEnHex = coloresMapa.get(nota.getColor().toLowerCase());
-            if (colorEnHex != null) {
-                holder.itemView.setBackgroundColor(Color.parseColor(colorEnHex));
-            } else {
-                holder.itemView.setBackgroundColor(Color.TRANSPARENT);
-            }
+            holder.itemView.setBackgroundColor(
+                    colorEnHex != null ? Color.parseColor(colorEnHex) : Color.TRANSPARENT
+            );
         } else {
             holder.itemView.setBackgroundColor(Color.TRANSPARENT);
         }
@@ -88,18 +88,17 @@ public class NotaAdapter extends RecyclerView.Adapter<NotaAdapter.NotaViewHolder
     }
 
     private void mostrarDialogoColor(Nota nota, int posicion) {
-        String[] colores = {"rojo", "verde", "azul", "amarillo", "magenta", "cian"};
+        String[] colores = {"rojo", "verde", "azul", "amarillo", "rosa", "cian", "blanco"};
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Seleccionar color");
         builder.setItems(colores, (dialog, which) -> {
             String colorSeleccionado = colores[which];
             nota.setColor(colorSeleccionado);
 
-            boolean resultado = baseDeDatos.actualizarNota(nota);
-
-            if (resultado) {
+            // Actualizar la base de datos y la lista
+            if (baseDeDatos.actualizarNota(nota)) {
                 listaNotas.set(posicion, nota);
-                notifyItemChanged(posicion);
+                notifyDataSetChanged(); // Actualiza la lista completa
             }
         });
         builder.show();

@@ -1,51 +1,74 @@
-/*package com.example.proyectofinal_javiergarrido.ui.ubi;
+package com.example.proyectofinal_javiergarrido.ui.ubi;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
+import com.example.proyectofinal_javiergarrido.R;
 import java.util.List;
 
 public class UbiAdapter extends RecyclerView.Adapter<UbiAdapter.UbicacionViewHolder> {
-/*
-    private List<Ubi> listaUbicaciones;
-    private OnUbicacionClickListener listener;
 
-    public interface OnUbicacionClickListener {
-        void onUbicacionClick(Ubi ubi);
+    private List<Ubicacion> ubicaciones;
+    private OnItemClickListener listener;
+
+    public interface OnItemClickListener {
+        void onItemClick(Ubicacion ubicacion);
     }
 
-    public UbiAdapter(List<Ubi> listaUbicaciones, OnUbicacionClickListener listener) {
-        this.listaUbicaciones = listaUbicaciones;
+    public UbiAdapter(List<Ubicacion> ubicaciones, OnItemClickListener listener) {
+        this.ubicaciones = ubicaciones;
         this.listener = listener;
     }
 
     @Override
     public UbicacionViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(android.R.layout.simple_list_item_1, parent, false);
-        return new UbicacionViewHolder(view);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_ubiadapter, parent, false);
+        return new UbicacionViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(UbicacionViewHolder holder, int position) {
-        Ubi ubi = listaUbicaciones.get(position);
-        holder.textView.setText(ubi.getNombre());
-        holder.itemView.setOnClickListener(v -> listener.onUbicacionClick(ubi));
+        Ubicacion ubicacion = ubicaciones.get(position);
+        holder.bind(ubicacion, position);
     }
 
     @Override
     public int getItemCount() {
-        return listaUbicaciones.size();
+        return ubicaciones.size();
     }
 
-    public static class UbicacionViewHolder extends RecyclerView.ViewHolder {
-        TextView textView;
+    class UbicacionViewHolder extends RecyclerView.ViewHolder {
+
+        private TextView textView;
+        private Button btnBorrar;
 
         public UbicacionViewHolder(View itemView) {
             super(itemView);
-            textView = itemView.findViewById(android.R.id.text1);
+            textView = itemView.findViewById(R.id.ubicacionText);
+            btnBorrar = itemView.findViewById(R.id.btnBorrar);
+        }
+
+        public void bind(final Ubicacion ubicacion, final int position) {
+            textView.setText(ubicacion.getNombre());
+
+            btnBorrar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ubicaciones.remove(position);
+                    notifyItemRemoved(position);
+                    notifyItemRangeChanged(position, ubicaciones.size());
+                }
+            });
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onItemClick(ubicacion);
+                }
+            });
         }
     }
 }
-*/

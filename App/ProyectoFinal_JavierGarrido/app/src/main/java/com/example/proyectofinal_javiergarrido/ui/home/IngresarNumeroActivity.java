@@ -2,6 +2,8 @@ package com.example.proyectofinal_javiergarrido.ui.home;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,14 +28,19 @@ public class IngresarNumeroActivity extends AppCompatActivity {
 
         btnGuardarNumero.setOnClickListener(v -> {
             String numeroTelefono = etNumeroTelefono.getText().toString().trim();
-            if (!numeroTelefono.isEmpty()) {
+
+            if (!numeroTelefono.isEmpty() && esNumeroValido(numeroTelefono)) {
                 Intent intent = new Intent();
                 intent.putExtra("numeroTelefono", numeroTelefono);
                 setResult(RESULT_OK, intent);
                 finish();
             } else {
-                Toast.makeText(IngresarNumeroActivity.this, "Por favor ingresa un número", Toast.LENGTH_SHORT).show();
+                Toast.makeText(IngresarNumeroActivity.this, "Por favor ingresa un número de teléfono válido", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private boolean esNumeroValido(String numero) {
+        return numero.matches("[+0-9\\-()\\s]*");
     }
 }

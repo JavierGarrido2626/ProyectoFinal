@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../CSS/style.css">
     <link rel="icon" type="image/png" href="../images/LOGO_MEJORADO-removebg-preview.png">
-
     <script src="../JS/script.js" defer></script>
     <title>Juego02 - Simón Dice</title>
 </head>
@@ -20,21 +19,21 @@
             <p>Recuerdos Vivos, Momentos Compartidos</p>
         </div>
         <nav>
-            <a href="../Index.html">Inicio</a>
+            <a href="./Inicio.html">Inicio</a>
             <a href="../pages/Juego01.html">Juego01</a>
             <a href="../pages/Juego03.html">Juego03</a>
             <a href="../pages/Juego04.html">Juego04</a>
         </nav>
-   
     </div>
 </header>
 
 <section class="SectionJuego02">
     <h1>JUEGO 02 - Colores</h1>
 
-     <div class="contadores">
+    <div class="contadores">
         <p id="contadorRondas">Rondas Completadas: 0</p>
         <p id="contadorRondaActual">Ronda Actual: 0</p>
+        <p id="contadorTiempo">Tiempo: 0 segundos</p> <!-- Contador de tiempo -->
     </div>
 
     <div class="DivSection01Juego02">
@@ -46,18 +45,14 @@
         <div class="DivBoxSectionJuego02" id="box3"></div>
         <div class="DivBoxSectionJuego02" id="box4"></div>
     </div>
-</section>
 
-<div class="SectionJuego01Boton">
-    <button id="botonEmpezar">Empezar</button>
-    <div id="niveles" style="display:none;">
-        <button class="nivel" data-velocidad="1000">Fácil</button>
-        <button class="nivel" data-velocidad="700">Medio</button>
-        <button class="nivel" data-velocidad="400">Difícil</button>
+    <!-- Botones de selección de nivel directamente visibles -->
+    <div id="niveles">
+        <button class="nivel" data-velocidad="1000" data-nivel="Facil">Facil</button>
+        <button class="nivel" data-velocidad="700" data-nivel="Medio">Medio</button>
+        <button class="nivel" data-velocidad="400" data-nivel="Dificil">Dificil</button>
     </div>
-</div>
-
-
+</section>
 
 <footer>
     <p><strong>Créditos:</strong> Javier Garrido García.</p>

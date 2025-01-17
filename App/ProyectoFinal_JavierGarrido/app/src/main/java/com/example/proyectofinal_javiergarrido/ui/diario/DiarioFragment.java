@@ -85,20 +85,12 @@ public class DiarioFragment extends Fragment {
         notaAdapter.actualizarLista(listaFiltrada);
     }
 
-    public void agregarNota(Nota nuevaNota) {
-        listaNotas.add(nuevaNota);
-        notaAdapter.notifyItemInserted(listaNotas.size() - 1);
-    }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == REQUEST_CODE_CREAR_NOTA && resultCode == RESULT_OK && data != null) {
-            Nota nuevaNota = (Nota) data.getSerializableExtra("nuevaNota");
-            if (nuevaNota != null) {
-                agregarNota(nuevaNota);
-            }
+            cargarNotasDesdeBD();
         }
     }
 }

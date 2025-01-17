@@ -1,133 +1,65 @@
 <!DOCTYPE html>
-<html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-        <title>Memoria Compartida.</title>
-        <link rel="icon" type="image/png"  href="images/LOGO_MEJORADO-removebg-preview.png">
-        <link rel="stylesheet" type="text/css" href="CSS/style.css">
-        <script src="./js/script.js"></script>
-
-
-        <link rel="stylesheet" type="text/css" href="CSS/media-queries.css">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión</title>
+    <link rel="icon" type="image/png" href="../images/LOGO_MEJORADO-removebg-preview.png">
+    <link rel="stylesheet" type="text/css" href="./CSS/style.css">
+    <script src="./JS/base.js" defer></script>
 </head>
+<body>
 
-
-    <body>
-        <!-- Cabecera-->
-
-        <header>
-        <!-- Contenedor para guardar dos div-->
-
-            <div>
-                        <!-- Primer DIV PARA USAR DE FONDO UNA IMAGEN-->
-                <div>
-                    
-                </div>
-                        <!-- Segundo DIV PARA EL ESLOGAN-->
-                <div>
-                    <p>Memoria Compartida</p>
-                    <br>
-                    <p>Recuerdos Vivos, Momentos Compartidos</p>
-                </div>
-
-                <div class="Login">
-                    <a href="./pages/Login.html">Inicio Sesion</a>
-                    <a href="./pages/Registro.html">Registro</a>
-                </div>
-
-                
-
-            </div>
-            
-         
-            
-
-          
-
-        </header>
-
-
-
-
-
-
-
-
-        <!-- ********************************* Importante cambiar a nava *******************************->
-
-
-        
-        Section del Titulo-->
-        <section>
-                    <!-- DIV TITULO-->
-
-         
+<header>
+    <div>
+        <!-- Primer DIV PARA USAR DE FONDO UNA IMAGEN -->
+        <div></div>
+        <!-- Segundo DIV PARA EL ESLOGAN -->
+        <div>
+            <p>Memoria Compartida</p>
             <br>
-
-                    <!-- DIV ENLACES-->
-
-            <div>
-
-                <a href="./pages/Informacion.html">Información</a>
-
-
-                <a href="./pages/ExplicacionJuegos.html">Explicacion Juegos</a>
-                    <!-- DIV LOGO-->
-
-                <div>
-                    <a href="./pages/Estadisticas.html">Estadísticas</a>
-                </div>
-
-
-            </div>
-        </section>
-
-        <div class="ContenedorSection">
-
-            <div class="boxh1">
-                <h1>Lista de Juegos</h1>
-            </div>
-            <br>
-        <!-- Section De los niveles-->
-            <div class="Section2">
-                <div class="box1" id="boxj1">
-                    
-                </div>
-
-
-                <div class="box2" id="boxj2">
-                  
-                </div>
-
-
-                <div class="box3" id="boxj3">
-                   
-                 </div>
-
-
-                 <div class="box4" id="boxj4">
-                   
-                 </div>
-
-           
-
-            </div>
+            <p>Recuerdos Vivos, Momentos Compartidos</p>
         </div>
+        <nav>
+            <a href="pages/Inicio.html" id="modoInvitado">Modo Invitado</a>
+            <a href="pages/Registro.html">Registro</a>
+        </nav>
+    </div>
+</header>
 
+<section class="sectionEstadisticas">
+    <div>
+        <h1>Iniciar Sesión</h1>
+        <form id="loginformulario">
+            <div>
+                <label for="nombreUsuario">Nombre de Usuario</label>
+                <input type="text" id="nombreUsuario" name="nombreUsuario" placeholder="Ingrese su nombre de usuario" />
+            </div>
 
-        <footer>
+            <div>
+                <label for="contrasena">Contraseña</label>
+                <input type="password" id="contrasena" name="contrasena" placeholder="Ingrese su contraseña" />
+            </div>
 
-            
-           <p> <strong> Creditos: </strong> Javier Garrido García.</p>
-            
-           <p>Mi misión es proporcionar recursos y apoyo a personas afectadas por el Alzheimer y sus cuidadores o familia.</p>
+            <div>
+                <button type="submit">Iniciar Sesión</button>
+            </div>
+        </form>
+        
+        <div id="mensajelogin"></div>
+    </div>
+</section>
 
-           <p>Para más información, visita: <a href="https://www.ceafa.es">CEAFA</a> | <a href="https://www.mayoclinic.org/es-es">Mayo Clinic</a>
-                Son páginas web que tienen información sobre esta enfermedad.
-           </p>
-        </footer>
+<div id="nombreUsuarioLogin"></div>
 
-    </body>
+<footer>
+    <p><strong>Creditos:</strong> Javier Garrido García.</p>
+    <p>Mi misión es proporcionar recursos y apoyo a personas afectadas por el Alzheimer y sus cuidadores o familia.</p>
+    <p>Para más información, visita: 
+        <a href="https://www.ceafa.es">CEAFA</a> | 
+        <a href="https://www.mayoclinic.org/es-es">Mayo Clinic</a>
+    </p>
+</footer>
+
+</body>
 </html>
