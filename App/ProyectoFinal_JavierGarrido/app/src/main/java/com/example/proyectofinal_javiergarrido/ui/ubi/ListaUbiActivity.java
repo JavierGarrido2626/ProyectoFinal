@@ -10,6 +10,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.proyectofinal_javiergarrido.R;
+import com.example.proyectofinal_javiergarrido.ui.ServiciosServer.ClienteApi;
+import com.example.proyectofinal_javiergarrido.ui.ServiciosServer.ServicioApi;
+
 import java.util.ArrayList;
 
 public class ListaUbiActivity extends AppCompatActivity {
@@ -19,17 +22,20 @@ public class ListaUbiActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listaubi);
 
+        ArrayList<Ubicacion> ubicaciones = (ArrayList<Ubicacion>) getIntent().getSerializableExtra("ubicaciones");
+
         RecyclerView recyclerView = findViewById(R.id.recyclerViewLista);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        ArrayList<Ubicacion> ubicaciones = (ArrayList<Ubicacion>) getIntent().getSerializableExtra("ubicaciones");
+        ServicioApi servicioApi = ClienteApi.getClient().create(ServicioApi.class);
 
         UbiAdapter adapter = new UbiAdapter(ubicaciones, new UbiAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Ubicacion ubicacion) {
                 mostrarRuta(ubicacion);
             }
-        });
+        }, servicioApi);
+
         recyclerView.setAdapter(adapter);
 
         Button btnSalir = findViewById(R.id.btnSalidaUbi);

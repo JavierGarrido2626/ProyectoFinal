@@ -1,6 +1,7 @@
 package com.example.proyectofinal_javiergarrido;
 
-import android.content.Intent;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -8,20 +9,22 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.proyectofinal_javiergarrido.ui.ServiciosServer.ClienteApi;
+import com.example.proyectofinal_javiergarrido.ui.ServiciosServer.ServicioApi;
 import com.example.proyectofinal_javiergarrido.ui.diario.Nota;
-import com.example.proyectofinal_javiergarrido.ui.diario.BaseDatosDiarioSQL;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class CrearNotaActivity extends AppCompatActivity {
 
     private EditText etTituloNota;
     private EditText etContenidoNota;
-    private BaseDatosDiarioSQL baseDatos;
-    private int notaId;
-    private String colorSeleccionado = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,64 +33,61 @@ public class CrearNotaActivity extends AppCompatActivity {
 
         etTituloNota = findViewById(R.id.et_titulo_nota);
         etContenidoNota = findViewById(R.id.et_contenido_nota);
-        baseDatos = new BaseDatosDiarioSQL(this);
-
-        Intent intent = getIntent();
-        if (intent != null && intent.hasExtra("id")) {
-            notaId = intent.getIntExtra("id", -1);
-            String titulo = intent.getStringExtra("titulo");
-            String contenido = intent.getStringExtra("contenido");
-            colorSeleccionado = intent.getStringExtra("color");
-
-            etTituloNota.setText(titulo);
-            etContenidoNota.setText(contenido);
-        } else {
-            notaId = -1;
-        }
     }
 
     public void guardarNota(View view) {
+
         String titulo = etTituloNota.getText().toString().trim();
         String contenido = etContenidoNota.getText().toString().trim();
+        int idUsuario = obtenerIdUsuario();
 
         if (titulo.isEmpty() || contenido.isEmpty()) {
             Toast.makeText(this, "Por favor, completa el título y el contenido", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        String fecha = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(new Date());
-
-        if (notaId != -1) {
-            Nota notaExistente = new Nota();
-            notaExistente.setId(notaId);
-            notaExistente.setTitulo(titulo);
-            notaExistente.setContenido(contenido);
-            notaExistente.setFecha(fecha);
-            notaExistente.setColor(colorSeleccionado);
-
-            boolean resultado = baseDatos.actualizarNota(notaExistente);
-
-            if (resultado) {
-                Intent resultIntent = new Intent();
-                resultIntent.putExtra("notaActualizada", notaExistente);
-                setResult(RESULT_OK, resultIntent);
-                Toast.makeText(this, "Nota actualizada con éxito", Toast.LENGTH_SHORT).show();
-                finish();
-            } else {
-                Toast.makeText(this, "Error al actualizar la nota", Toast.LENGTH_SHORT).show();
-            }
-        } else {
-            Nota nuevaNota = new Nota(titulo, contenido, fecha, colorSeleccionado);
-            long idNota = baseDatos.agregarNota(nuevaNota);
-            if (idNota != -1) {
-                Intent resultIntent = new Intent();
-                resultIntent.putExtra("nuevaNota", nuevaNota);
-                setResult(RESULT_OK, resultIntent);
-                Toast.makeText(this, "Nota creada con éxito", Toast.LENGTH_SHORT).show();
-                finish();
-            } else {
-                Toast.makeText(this, "Error al guardar la nota", Toast.LENGTH_SHORT).show();
-            }
+        if (idUsuario == -1) {
+            Toast.makeText(this, "Error al obtener el ID de usuario", Toast.LENGTH_SHORT).show();
+            return;
         }
+
+        SimpleDateFormat sdfFecha = new SimpleDateFormat("dd/MM/yyyy", new Locale("es", "ES"));
+        SimpleDateFormat sdfHora = new SimpleDateFormat("HH:mm", new Locale("es", "ES"));
+        String fecha = sdfFecha.format(new Date());
+        String hora = sdfHora.format(new Date());
+
+        String fechaHora = fecha + " " + hora;
+
+        Nota nuevaNota = new Nota();
+        nuevaNota.setTitulo(titulo);
+        nuevaNota.setContenido(contenido);
+        nuevaNota.setFecha(fechaHora);
+        nuevaNota.setIdUsuario(idUsuario);
+
+        ServicioApi servicioApi = ClienteApi.getClient().create(ServicioApi.class);
+        Call<Nota> call = servicioApi.guardarNota(nuevaNota);
+
+        call.enqueue(new Callback<Nota>() {
+            @Override
+            public void onResponse(Call<Nota> call, Response<Nota> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(CrearNotaActivity.this, "Nota creada con éxito", Toast.LENGTH_SHORT).show();
+                    setResult(RESULT_OK);
+                    finish();
+                } else {
+                    Toast.makeText(CrearNotaActivity.this, "Error al guardar la nota", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Nota> call, Throwable t) {
+                Toast.makeText(CrearNotaActivity.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private int obtenerIdUsuario() {
+        SharedPreferences sharedPreferences = this.getSharedPreferences("SesionUsuario", Context.MODE_PRIVATE);
+        return sharedPreferences.getInt("idUsuario", -1);
     }
 }

@@ -6,80 +6,98 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#F3E5F5"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:padding="16dp">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="554dp"
+        android:layout_margin="16dp"
+        app:cardBackgroundColor="#FFFFFF"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="12dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="549dp"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:id="@+id/title_alarmas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:gravity="center"
+                android:text="Notificaciones"
+                android:textColor="#4CAF50"
+                android:textSize="26sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/text_alarmas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:gravity="center"
+                android:text="Presiona el botón para abrir la aplicación de Notificaciones."
+                android:textColor="#424242"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/btn_alarmas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:backgroundTint="#00A86B"
+                android:padding="16dp"
+                android:text="Abrir Notificaciones"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/title_llamadas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:gravity="center"
+                android:text="Llamadas"
+                android:textColor="#4CAF50"
+                android:textSize="26sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/text_llamadas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:gravity="center"
+                android:text="Presiona el boton de ingresar numero e inserta el numero que quieras."
+                android:textColor="#424242"
+                android:textSize="16sp" />
 
 
-        <TextView
-            android:id="@+id/title_alarmas"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:gravity="center"
-            android:text="Alarmas"
-            android:textColor="#800080"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            <Button
+                android:id="@+id/btn_ingresar_numero"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:backgroundTint="#00A86B"
+                android:padding="16dp"
+                android:text="Ingresar Número"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/text_alarmas"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:gravity="center"
-            android:text="Presiona el botón para abrir la aplicación de Alarmas."
-            android:textColor="#333333"
-            android:textSize="16sp" />
+            <Button
+                android:id="@+id/btn_llamadas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#00A86B"
+                android:padding="16dp"
+                android:text="Realizar Llamada"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
 
-        <Button
-            android:id="@+id/btn_alarmas"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="32dp"
-            android:background="@android:color/holo_blue_dark"
-            android:padding="16dp"
-            android:text="Abrir Alarmas"
-            android:textColor="#FFFFFF" />
-
-
-        <TextView
-            android:id="@+id/title_llamadas"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:gravity="center"
-            android:text="Llamadas"
-            android:textColor="#800080"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/text_llamadas"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:gravity="center"
-            android:text="Presiona el botón para realizar una llamada. Mantén pulsado el botón para ingresar el número."
-            android:textColor="#333333"
-            android:textSize="16sp" />
-
-        <Button
-            android:id="@+id/btn_llamadas"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/holo_blue_dark"
-            android:padding="16dp"
-            android:text="Realizar Llamada"
-            android:textColor="#FFFFFF" />
-
-    </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-

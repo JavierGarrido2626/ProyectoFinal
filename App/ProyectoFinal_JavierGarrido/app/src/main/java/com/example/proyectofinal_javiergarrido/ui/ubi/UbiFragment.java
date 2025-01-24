@@ -1,9 +1,10 @@
 package com.example.proyectofinal_javiergarrido.ui.ubi;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +19,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import com.example.proyectofinal_javiergarrido.R;
+import com.example.proyectofinal_javiergarrido.ui.ServiciosServer.ClienteApi;
+import com.example.proyectofinal_javiergarrido.ui.ServiciosServer.ServicioApi;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -29,6 +32,11 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class UbiFragment extends Fragment implements OnMapReadyCallback {
 
@@ -37,8 +45,8 @@ public class UbiFragment extends Fragment implements OnMapReadyCallback {
     private Button btnGuardarUbicacion, btnListaUbi;
     private LatLng posicionSeleccionada;
     private FusedLocationProviderClient fusedLocationClient;
-    private ArrayList<Ubicacion> ubicacionesGuardadas;
     private Marker marcador;
+    private int idUsuario;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,7 +58,15 @@ public class UbiFragment extends Fragment implements OnMapReadyCallback {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        ubicacionesGuardadas = new ArrayList<>();
+        nombreUbicacionInput = view.findViewById(R.id.nombreUbicacionInput);
+        btnGuardarUbicacion = view.findViewById(R.id.btnGuardarUbicacion);
+        btnListaUbi = view.findViewById(R.id.btnListaUbi);
+
+        idUsuario = obtenerIdUsuario();
+        if (idUsuario == -1) {
+            Log.e("UbiFragment", "No se ha recibido el id_usuario de SharedPreferences");
+            Toast.makeText(getContext(), "No se ha recibido el id_usuario", Toast.LENGTH_SHORT).show();
+        }
 
         if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -59,27 +75,10 @@ public class UbiFragment extends Fragment implements OnMapReadyCallback {
                     1);
         }
 
-        nombreUbicacionInput = view.findViewById(R.id.nombreUbicacionInput);
-        btnGuardarUbicacion = view.findViewById(R.id.btnGuardarUbicacion);
-        btnListaUbi = view.findViewById(R.id.btnListaUbi);
-
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity());
 
-        btnGuardarUbicacion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                guardarUbicacion();
-            }
-        });
-
-        btnListaUbi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ListaUbiActivity.class);
-                intent.putExtra("ubicaciones", ubicacionesGuardadas);
-                startActivity(intent);
-            }
-        });
+        btnGuardarUbicacion.setOnClickListener(v -> guardarUbicacion());
+        btnListaUbi.setOnClickListener(v -> mostrarListaUbicaciones());
 
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         if (mapFragment != null) {
@@ -98,40 +97,34 @@ public class UbiFragment extends Fragment implements OnMapReadyCallback {
             obtenerUbicacionActual();
         }
 
-        mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
-            @Override
-            public void onMapLongClick(LatLng latLng) {
-                if (marcador != null) {
-                    marcador.remove();
-                }
-                marcador = mMap.addMarker(new MarkerOptions().position(latLng).title("Ubicación seleccionada"));
-                posicionSeleccionada = latLng;
+        mMap.setOnMapLongClickListener(latLng -> {
+            if (marcador != null) {
+                marcador.remove();
             }
+            marcador = mMap.addMarker(new MarkerOptions().position(latLng).title("Ubicación seleccionada"));
+            posicionSeleccionada = latLng;
         });
 
-        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-            @Override
-            public void onMapClick(LatLng latLng) {
-                if (marcador != null) {
-                    marcador.remove();
-                    marcador = null;
-                }
+        mMap.setOnMapClickListener(latLng -> {
+            if (marcador != null) {
+                marcador.remove();
+                marcador = null;
             }
         });
     }
 
     private void obtenerUbicacionActual() {
         fusedLocationClient.getLastLocation()
-                .addOnSuccessListener(getActivity(), new com.google.android.gms.tasks.OnSuccessListener<Location>() {
-                    @Override
-                    public void onSuccess(Location location) {
-                        if (location != null) {
-                            LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
-                            mMap.addMarker(new MarkerOptions().position(latLng).title("Tu ubicación"));
-                        } else {
-                            Toast.makeText(getContext(), "No se pudo obtener la ubicación actual", Toast.LENGTH_SHORT).show();
+                .addOnSuccessListener(getActivity(), location -> {
+                    if (location != null) {
+                        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+                        if (marcador != null) {
+                            marcador.remove();
                         }
+                        marcador = mMap.addMarker(new MarkerOptions().position(latLng).title("Tu ubicación"));
+                    } else {
+                        Toast.makeText(getContext(), "No se pudo obtener la ubicación actual", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -143,15 +136,60 @@ public class UbiFragment extends Fragment implements OnMapReadyCallback {
         }
 
         String nombre = nombreUbicacionInput.getText().toString().trim();
+
         if (nombre.isEmpty()) {
-            nombre = "Ubicación " + (ubicacionesGuardadas.size() + 1);
+            Toast.makeText(getContext(), "Por favor ingresa un nombre para la ubicación", Toast.LENGTH_SHORT).show();
+            return;
         }
 
-        Ubicacion ubicacion = new Ubicacion(posicionSeleccionada.latitude, posicionSeleccionada.longitude, nombre);
-        ubicacionesGuardadas.add(ubicacion);
+        Ubicacion ubicacion = new Ubicacion(posicionSeleccionada.latitude, posicionSeleccionada.longitude, nombre, idUsuario);
 
-        nombreUbicacionInput.setText("");
+        ServicioApi servicioApi = ClienteApi.getClient().create(ServicioApi.class);
+        Call<Void> call = servicioApi.guardarUbicacion(ubicacion);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(getContext(), "Ubicación guardada correctamente", Toast.LENGTH_SHORT).show();
+                    nombreUbicacionInput.setText("");
+                    posicionSeleccionada = null;
+                } else {
+                    Toast.makeText(getContext(), "Error al guardar la ubicación", Toast.LENGTH_SHORT).show();
+                }
+            }
 
-        Toast.makeText(getContext(), "Ubicación guardada correctamente", Toast.LENGTH_SHORT).show();
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(getContext(), "Error de red", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void mostrarListaUbicaciones() {
+        ServicioApi servicioApi = ClienteApi.getClient().create(ServicioApi.class);
+        Call<RespuestaUbicaciones> call = servicioApi.obtenerUbicacionesPorUsuario(idUsuario);
+        call.enqueue(new Callback<RespuestaUbicaciones>() {
+            @Override
+            public void onResponse(Call<RespuestaUbicaciones> call, Response<RespuestaUbicaciones> response) {
+                if (response.isSuccessful()) {
+                    List<Ubicacion> ubicaciones = response.body().getUbicaciones();
+                    Intent intent = new Intent(getActivity(), ListaUbiActivity.class);
+                    intent.putExtra("ubicaciones", (ArrayList<Ubicacion>) ubicaciones);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(getContext(), "Error al obtener las ubicaciones", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RespuestaUbicaciones> call, Throwable t) {
+                Toast.makeText(getContext(), "Error de red", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private int obtenerIdUsuario() {
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("SesionUsuario", Context.MODE_PRIVATE);
+        return sharedPreferences.getInt("idUsuario", -1);
     }
 }

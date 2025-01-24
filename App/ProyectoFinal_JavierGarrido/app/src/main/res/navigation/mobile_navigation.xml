@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/nav_home"
         android:name="com.example.proyectofinal_javiergarrido.ui.home.HomeFragment"
-        android:label="Alarmas/Llamadas"
+        android:label="Notificaciones/Llamadas"
         tools:layout="@layout/fragment_home" />
 
     <fragment

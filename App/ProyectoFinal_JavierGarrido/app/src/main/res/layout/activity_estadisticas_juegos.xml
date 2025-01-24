@@ -1,156 +1,181 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F3E5F5"
+    android:background="#FFFFFF"
     tools:context="Estadisticas Juegos">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:padding="16dp">
 
-        <TextView
-            android:id="@+id/txtEstadisticasJuegos"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Estadísticas de Juegos"
-            android:textColor="#800080"
-            android:textSize="28sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <GridLayout
-            android:id="@+id/gridLayout"
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:columnCount="2"
-            android:layout_marginTop="32dp"
-            app:layout_constraintTop_toBottomOf="@id/txtEstadisticasJuegos"
-            android:orientation="horizontal">
+            app:cardCornerRadius="16dp"
+            app:cardElevation="12dp">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center">
+                android:padding="16dp">
 
                 <TextView
-                    android:id="@+id/txtJuegoContarObjetos"
+                    android:id="@+id/txtEstadisticasJuegos"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Juego de Contar Objetos"
-                    android:textColor="#333333"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:layout_marginBottom="24dp"
+                    android:text="Estadísticas de Juegos"
+                    android:textColor="#4CAF50"
+                    android:textSize="28sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageButton
-                    android:id="@+id/imgbtnJuegoContarObjetos"
+                <LinearLayout
+                    android:id="@+id/verticalLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@id/txtEstadisticasJuegos">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:id="@+id/txtJuegoContarObjetos"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Juego de Contar Objetos"
+                            android:textColor="#555555"
+                            android:textSize="22sp"
+                            android:textStyle="bold"
+                            android:gravity="center" />
+
+                        <ImageButton
+                            android:id="@+id/imgbtnJuegoContarObjetos"
+                            android:layout_width="200dp"
+                            android:layout_height="200dp"
+                            android:layout_marginTop="16dp"
+                            android:backgroundTint="#F1F8E9"
+                            android:padding="16dp"
+                            android:scaleType="centerInside"
+                            app:srcCompat="@drawable/juegocontarobjetos"
+                            android:contentDescription="Juego Contar Objetos" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:id="@+id/txtJuegoColor"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Juego de Colores"
+                            android:textColor="#555555"
+                            android:textSize="22sp"
+                            android:textStyle="bold"
+                            android:gravity="center" />
+
+                        <ImageButton
+                            android:id="@+id/imgbtnJuegoColor"
+                            android:layout_width="200dp"
+                            android:layout_height="200dp"
+                            android:layout_marginTop="16dp"
+                            android:backgroundTint="#F1F8E9"
+                            android:padding="16dp"
+                            android:scaleType="centerInside"
+                            app:srcCompat="@drawable/juegocolor"
+                            android:contentDescription="Juego Colores" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:id="@+id/txtJuegoMemoria"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Juego de Memoria"
+                            android:textColor="#555555"
+                            android:textSize="22sp"
+                            android:textStyle="bold"
+                            android:gravity="center" />
+
+                        <ImageButton
+                            android:id="@+id/imgbtnJuegoMemoria"
+                            android:layout_width="200dp"
+                            android:layout_height="200dp"
+                            android:layout_marginTop="16dp"
+                            android:backgroundTint="#F1F8E9"
+                            android:padding="16dp"
+                            android:scaleType="centerInside"
+                            app:srcCompat="@drawable/juegomemoria"
+                            android:contentDescription="Juego Memoria" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:id="@+id/txtJuegoTrabalenguas"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Juego de Trabalenguas"
+                            android:textColor="#555555"
+                            android:textSize="22sp"
+                            android:textStyle="bold"
+                            android:gravity="center" />
+
+                        <ImageButton
+                            android:id="@+id/imgbtnJuegoTrabalenguas"
+                            android:layout_width="200dp"
+                            android:layout_height="200dp"
+                            android:layout_marginTop="16dp"
+                            android:backgroundTint="#F1F8E9"
+                            android:padding="16dp"
+                            android:scaleType="centerInside"
+                            app:srcCompat="@drawable/juegotrabalenguas"
+                            android:contentDescription="Juego Trabalenguas" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btnEstadisticasJuegos"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="24dp"
+                    android:backgroundTint="#00A86B"
                     android:padding="16dp"
-                    android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/juegocontarobjetos"
-                    android:contentDescription="Juego Contar Objetos" />
-            </LinearLayout>
+                    android:text="Volver al Inicio"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/verticalLayout" />
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center">
-
-                <TextView
-                    android:id="@+id/txtJuegoColor"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Juego de Colores"
-                    android:textColor="#333333"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <ImageButton
-                    android:id="@+id/imgbtnJuegoColor"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:padding="16dp"
-                    android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/juegocolor"
-                    android:contentDescription="Juego Colores" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center">
-
-                <TextView
-                    android:id="@+id/txtJuegoMemoria"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Juego de Memoria"
-                    android:textColor="#333333"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <ImageButton
-                    android:id="@+id/imgbtnJuegoMemoria"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:padding="16dp"
-                    android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/juegomemoria"
-                    android:contentDescription="Juego Memoria" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center">
-
-                <TextView
-                    android:id="@+id/txtJuegoTrabalenguas"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Juego de Trabalenguas"
-                    android:textColor="#333333"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <ImageButton
-                    android:id="@+id/imgbtnJuegoTrabalenguas"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:padding="16dp"
-                    android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/juegotrabalenguas"
-                    android:contentDescription="Juego Trabalenguas" />
-            </LinearLayout>
-
-        </GridLayout>
-
-        <Button
-            android:id="@+id/btnEstadisticasJuegos"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:background="@android:color/holo_blue_dark"
-            android:padding="16dp"
-            android:text="Volver al Inicio"
-            android:textColor="#FFFFFF"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/gridLayout" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+    </ScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

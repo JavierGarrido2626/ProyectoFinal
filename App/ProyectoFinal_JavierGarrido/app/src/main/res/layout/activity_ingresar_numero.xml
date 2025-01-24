@@ -1,35 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:background="#F5F5F5"
+    android:padding="20dp">
 
-    <EditText
-        android:id="@+id/et_numero_telefono"
-        android:layout_width="0dp"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Número de Teléfono"
-        android:inputType="phone"
-        android:textColor="#333"
-        android:textSize="18sp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:padding="12dp"
-        android:digits="0123456789+-()"
-        android:maxLength="9" />
+        tools:layout_editor_absoluteX="20dp">
 
-    <Button
-        android:id="@+id/btn_guardar_numero"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Guardar Número"
-        android:textColor="@android:color/white"
-        android:backgroundTint="@android:color/holo_blue_dark"
-        app:layout_constraintTop_toBottomOf="@id/et_numero_telefono"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:padding="14dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:id="@+id/text_titulo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="8dp"
+                android:gravity="center"
+                android:text="Introduce tu Número de Teléfono"
+                android:textColor="#424242"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/text_subtitulo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
+                android:text="Selecciona el prefijo de tu país y luego ingresa tu número de teléfono."
+                android:textColor="#757575"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/txtNumeroGuardado"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Número guardado: +34 612345678"
+                android:textColor="#424242"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:layout_marginBottom="12dp"/>
+
+            <com.hbb20.CountryCodePicker
+                android:id="@+id/ccp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="12dp"
+                app:ccp_defaultNameCode="ES"
+                app:ccp_showArrow="true"
+                app:ccp_showFlag="true"
+                app:ccp_showNameCode="false"
+                app:ccp_showPhoneCode="true" />
+
+            <EditText
+                android:id="@+id/ed_numero_telefono"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/edittext_background"
+                android:digits="0123456789"
+                android:drawableLeft="@drawable/iconotelefono"
+                android:drawablePadding="12dp"
+                android:hint="Insertar Número de Teléfono"
+                android:maxLength="15"
+                android:padding="14dp"
+                android:textColor="#333"
+                android:textColorHint="#757575"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/ed_numero_modificar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/edittext_background"
+                android:digits="0123456789"
+                android:drawableLeft="@drawable/iconotelefono"
+                android:drawablePadding="12dp"
+                android:hint="Modificar Número de Teléfono"
+                android:maxLength="15"
+                android:padding="14dp"
+                android:textColor="#333"
+                android:textColorHint="#757575"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btn_guardar_numero"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="#00A86B"
+                android:padding="16dp"
+                android:text="Guardar Número"
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/btn_SalirTelefono"
+                android:layout_width="331dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="#00A86B"
+                android:padding="16dp"
+                android:text="Salir"
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

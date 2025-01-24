@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Color de fondo gradiente -->
+    <gradient
+        android:startColor="#4CAF50"
+        android:endColor="#2196F3"
+        android:angle="45"/>
+
+    <!-- Bordes redondeados -->
+    <corners android:radius="8dp"/>
+
+    <!-- Borde -->
+    <stroke android:color="#BBBBBB" android:width="1dp"/>
+
+    <!-- Relleno interno del fondo -->
+    <solid android:color="#FFFFFF"/>
+</shape>

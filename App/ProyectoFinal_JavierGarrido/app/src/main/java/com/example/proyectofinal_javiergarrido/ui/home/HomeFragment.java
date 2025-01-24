@@ -1,12 +1,10 @@
 package com.example.proyectofinal_javiergarrido.ui.home;
 
-import static android.app.Activity.RESULT_OK;
-
+import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.AlarmClock;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,17 +13,18 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
-import android.Manifest;
-
 import com.example.proyectofinal_javiergarrido.R;
+import com.example.proyectofinal_javiergarrido.ui.ServiciosServer.ClienteApi;
+import com.example.proyectofinal_javiergarrido.ui.ServiciosServer.ServicioApi;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class HomeFragment extends Fragment {
 
-    private static final int SOLICITUD_PERMISO_LLAMADA = 1;
     private static final int SOLICITUD_NUMERO = 2;
     private String numeroTelefonoGuardado;
 
@@ -36,44 +35,66 @@ public class HomeFragment extends Fragment {
 
         Button btnLlamada = root.findViewById(R.id.btn_llamadas);
         Button btnAlarma = root.findViewById(R.id.btn_alarmas);
+        Button btnNumero = root.findViewById(R.id.btn_ingresar_numero);
+
+        int idUsuario = obtenerIdUsuario();
+        Log.d("HomeFragment", "ID de usuario: " + idUsuario);
+
+        obtenerNumeroTelefono(idUsuario);
 
         btnAlarma.setOnClickListener(v -> {
             try {
-                Intent intent = new Intent(AlarmClock.ACTION_SHOW_ALARMS);
+                Intent intent = new Intent(getContext(), ListaNotificacionActivity.class);
                 startActivity(intent);
             } catch (Exception e) {
-                Log.e("ErrorAlarma", "Error al abrir la aplicación de reloj", e);
-                Toast.makeText(getContext(), "No se pudo abrir la aplicación del reloj: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.e("ErrorAlarma", "Error al abrir la actividad de la lista de alarmas", e);
+                Toast.makeText(getContext(), "No se pudo abrir la lista de alarmas: " + e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 
-        btnLlamada.setOnLongClickListener(v -> {
+
+        btnNumero.setOnClickListener(v -> {
             Intent intent = new Intent(getContext(), IngresarNumeroActivity.class);
             startActivityForResult(intent, SOLICITUD_NUMERO);
-            return true;
         });
 
         btnLlamada.setOnClickListener(v -> {
             Log.d("HomeFragment", "Botón de llamada clicado");
             if (numeroTelefonoGuardado != null && !numeroTelefonoGuardado.isEmpty()) {
-                if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CALL_PHONE)
-                        != PackageManager.PERMISSION_GRANTED) {
-                    // Solicitar permiso de llamada si no está otorgado
-                    ActivityCompat.requestPermissions(getActivity(),
-                            new String[]{Manifest.permission.CALL_PHONE}, SOLICITUD_PERMISO_LLAMADA);
-                } else {
-                    realizarLlamada(); // Realizar la llamada si se tiene el permiso
-                }
+                realizarLlamada();
             } else {
-                Toast.makeText(getContext(), "Por favor, ingresa un número primero.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "No hay número guardado. Ingresa uno primero.", Toast.LENGTH_SHORT).show();
             }
         });
 
         return root;
     }
 
-    private String formatearNumero(String numero) {
-        return numero.replaceAll("[^0-9]", "");
+    private void obtenerNumeroTelefono(int idUsuario) {
+        ServicioApi servicioApi = ClienteApi.getClient().create(ServicioApi.class);
+        Call<ObtenerTelefonoObjeto> call = servicioApi.obtenerNumeroTelefono(idUsuario);
+        call.enqueue(new Callback<ObtenerTelefonoObjeto>() {
+            @Override
+            public void onResponse(Call<ObtenerTelefonoObjeto> call, Response<ObtenerTelefonoObjeto> response) {
+                if (response.isSuccessful()) {
+                    ObtenerTelefonoObjeto respuesta = response.body();
+                    if (respuesta != null && respuesta.getNumero_telefono() != null && !respuesta.getNumero_telefono().isEmpty()) {
+                        numeroTelefonoGuardado = respuesta.getNumero_telefono();
+                    } else {
+                        numeroTelefonoGuardado = null;
+                    }
+                } else {
+                    Log.e("ErrorObtenerNumero", "Error al obtener el número guardado.");
+                    numeroTelefonoGuardado = null;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ObtenerTelefonoObjeto> call, Throwable t) {
+                Log.e("ErrorObtenerNumero", "Fallo en la conexión con el servidor", t);
+                numeroTelefonoGuardado = null;
+            }
+        });
     }
 
     private void realizarLlamada() {
@@ -88,30 +109,19 @@ public class HomeFragment extends Fragment {
         }
     }
 
+    private int obtenerIdUsuario() {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("SesionUsuario", Context.MODE_PRIVATE);
+        return sharedPreferences.getInt("idUsuario", -1);
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == SOLICITUD_NUMERO && resultCode == RESULT_OK) {
+        if (requestCode == SOLICITUD_NUMERO && resultCode == getActivity().RESULT_OK) {
             if (data != null) {
                 numeroTelefonoGuardado = data.getStringExtra("numeroTelefono");
-
-                numeroTelefonoGuardado = formatearNumero(numeroTelefonoGuardado);
-
                 Toast.makeText(getContext(), "Número guardado: " + numeroTelefonoGuardado, Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int codigoSolicitud, String[] permisos, int[] resultadosPermiso) {
-        super.onRequestPermissionsResult(codigoSolicitud, permisos, resultadosPermiso);
-
-        if (codigoSolicitud == SOLICITUD_PERMISO_LLAMADA) {
-            if (resultadosPermiso.length > 0 && resultadosPermiso[0] == PackageManager.PERMISSION_GRANTED) {
-                realizarLlamada();
-            } else {
-                Toast.makeText(getContext(), "Permiso denegado para hacer llamadas", Toast.LENGTH_SHORT).show();
             }
         }
     }

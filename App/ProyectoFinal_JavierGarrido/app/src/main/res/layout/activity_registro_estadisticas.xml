@@ -4,123 +4,145 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:background="#F3E5F5">
+    android:background="#F5F5F5"
+    android:padding="16dp">
 
-    <TextView
-        android:id="@+id/tvTituloRegistro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:text="Formulario de Registro"
-        android:textColor="#800080"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/edNombre"
+    <FrameLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="@android:color/darker_gray"
-        android:hint="Nombre"
-        android:inputType="textPersonName"
-        android:maxLength="40"
-        android:padding="12dp"
-        android:textColor="#333"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="16dp"
+        android:elevation="8dp"
+        android:background="#ffffff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvTituloRegistro" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-    <EditText
-        android:id="@+id/edApellidos"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="@android:color/darker_gray"
-        android:hint="Apellidos"
-        android:inputType="textPersonName"
-        android:maxLength="40"
-        android:padding="12dp"
-        android:textColor="#333"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edNombre" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp">
 
-    <EditText
-        android:id="@+id/edUsuarioRegistro"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="@android:color/darker_gray"
-        android:hint="Nombre de Usuario"
-        android:inputType="text"
-        android:maxLength="40"
-        android:padding="12dp"
-        android:textColor="#333"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edApellidos" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:gravity="center"
+                android:text="Formulario de Registro"
+                android:textColor="#2C6B3F"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/edCorreo"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="@android:color/darker_gray"
-        android:hint="Correo Electrónico"
-        android:inputType="textEmailAddress"
-        android:maxLength="40"
-        android:padding="12dp"
-        android:textColor="#333"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edUsuarioRegistro" />
+            <EditText
+                android:id="@+id/edNombre"
+                android:layout_width="310dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:backgroundTint="#00A86B"
+                android:hint="Nombre"
+                android:inputType="textPersonName"
+                android:maxLength="40"
+                android:padding="12dp"
+                android:textColor="#333"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
-    <EditText
-        android:id="@+id/edContrasenaRegistro"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="@android:color/darker_gray"
-        android:hint="Contraseña"
-        android:inputType="textPassword"
-        android:maxLength="40"
-        android:padding="12dp"
-        android:textColor="#333"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edCorreo" />
+            <EditText
+                android:id="@+id/edApellidos"
+                android:layout_width="310dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:backgroundTint="#00A86B"
+                android:hint="Apellidos"
+                android:inputType="textPersonName"
+                android:maxLength="40"
+                android:padding="12dp"
+                android:textColor="#333"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/btnRegistrar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:backgroundTint="@android:color/holo_blue_dark"
-        android:padding="14dp"
-        android:text="Registrar"
-        android:textColor="@android:color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edContrasenaRegistro" />
+            <EditText
+                android:id="@+id/edUsuarioRegistro"
+                android:layout_width="307dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:backgroundTint="#00A86B"
+                android:hint="Nombre de Usuario"
+                android:inputType="text"
+                android:maxLength="40"
+                android:padding="12dp"
+                android:textColor="#333"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/btnVolverLoginRegistro"
-        android:layout_width="372dp"
-        android:layout_height="66dp"
-        android:layout_marginTop="52dp"
-        android:backgroundTint="@android:color/holo_blue_dark"
-        android:padding="14dp"
-        android:text="Volver Login"
-        android:textColor="@android:color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnRegistrar" />
+            <EditText
+                android:id="@+id/edCorreo"
+                android:layout_width="307dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:backgroundTint="#00A86B"
+                android:hint="Correo Electrónico"
+                android:inputType="textEmailAddress"
+                android:maxLength="40"
+                android:padding="12dp"
+                android:textColor="#333"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/llContrasenaRegistro"
+                android:layout_width="310dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/edittext_background"
+                android:orientation="horizontal"
+                android:padding="12dp">
+
+                <EditText
+                    android:id="@+id/edContrasenaRegistro"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:hint="Contraseña"
+                    android:inputType="textPassword"
+                    android:maxLength="40"
+                    android:textColor="#333"
+                    android:textColorHint="#757575" />
+
+                <ImageView
+                    android:id="@+id/imgIconoContraRegistro"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_marginStart="8dp"
+                    android:contentDescription="Mostrar Contraseña"
+                    android:src="@drawable/ojocerrado"
+                    android:tint="#757575" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnRegistrar"
+                android:layout_width="309dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:backgroundTint="#00A86B"
+                android:padding="14dp"
+                android:text="Registrar"
+                android:textColor="@android:color/white" />
+
+            <Button
+                android:id="@+id/btnVolverLoginRegistro"
+                android:layout_width="306dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="#00A86B"
+                android:padding="14dp"
+                android:text="Volver Login"
+                android:textColor="@android:color/white" />
+
+        </LinearLayout>
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

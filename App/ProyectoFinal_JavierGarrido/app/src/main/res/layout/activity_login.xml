@@ -4,65 +4,154 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:background="#F3E5F5">
+    android:background="#F5F5F5"
+    tools:context=".LoginActivity">
+
+    <View
+        android:id="@+id/topBackground"
+        android:layout_width="0dp"
+        android:layout_height="220dp"
+        android:background="@drawable/top_gradient_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="107dp"
+        android:layout_height="103dp"
+        android:layout_marginTop="40dp"
+        android:contentDescription="App Logo"
+        android:src="@drawable/logomejoradomodified"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvTituloLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"
         android:text="Iniciar Sesión"
-        android:textSize="24sp"
+        android:textColor="#FFFFFF"
+        android:textSize="28sp"
         android:textStyle="bold"
-        android:textColor="#800080"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/logo" />
 
-    <EditText
-        android:id="@+id/edUsuario"
-        android:layout_width="0dp"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardContainer"
+        android:layout_width="411dp"
         android:layout_height="wrap_content"
-        android:hint="Usuario"
-        android:inputType="text"
-        android:padding="12dp"
-        app:layout_constraintTop_toBottomOf="@id/tvTituloLogin"
+        android:background="#C16F6F"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/topBackground">
 
-    <EditText
-        android:id="@+id/edContrasena"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="Contraseña"
-        android:inputType="textPassword"
-        android:padding="12dp"
-        app:layout_constraintTop_toBottomOf="@id/edUsuario"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <LinearLayout
+            android:layout_width="398dp"
+            android:layout_height="369dp"
+            android:orientation="vertical"
+            android:padding="16dp">
 
-    <Button
-        android:id="@+id/btnInicio"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Iniciar Sesión"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="@android:color/holo_blue_dark"
-        android:textColor="@android:color/white"
-        app:layout_constraintTop_toBottomOf="@id/edContrasena"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+            <LinearLayout
+                android:id="@+id/llUsuario"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/edittext_background"
+                android:orientation="horizontal"
+                android:padding="12dp">
 
-    <Button
-        android:id="@+id/btnRegistro"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Registrarse"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="@android:color/holo_blue_dark"
-        android:textColor="@android:color/white"
-        app:layout_constraintTop_toBottomOf="@id/btnInicio"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="8dp"
+                    android:contentDescription="Usuario Icono"
+                    android:src="@drawable/iconousuario"
+                    android:tint="#00A86B" />
+
+                <EditText
+                    android:id="@+id/edUsuario"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:hint="Usuario"
+                    android:inputType="textEmailAddress"
+                    android:padding="4dp"
+                    android:textColor="#212121"
+                    android:textColorHint="#757575" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llContrasena"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/edittext_background"
+                android:orientation="horizontal"
+                android:padding="12dp">
+
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="8dp"
+                    android:contentDescription="Contraseña Icono"
+                    android:src="@drawable/iconocandado"
+                    android:tint="#00A86B" />
+
+                <EditText
+                    android:id="@+id/edContrasena"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:hint="Contraseña"
+                    android:inputType="textPassword"
+                    android:padding="4dp"
+                    android:textColor="#212121"
+                    android:textColorHint="#757575" />
+
+                <ImageView
+                    android:id="@+id/imgIconoContra"
+                    android:layout_width="28dp"
+                    android:layout_height="31dp"
+                    android:layout_marginStart="8dp"
+                    android:contentDescription="Mostrar Contraseña"
+                    android:src="@drawable/ojocerrado"
+                    android:tint="#757575" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnInicio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="#555555"
+                android:minHeight="60dp"
+                android:text="Iniciar Sesión"
+                android:textSize="16sp"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white" />
+
+            <Button
+                android:id="@+id/btnRegistro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:backgroundTint="#555555"
+                android:minHeight="60dp"
+                android:text="Registrarse"
+                android:textSize="16sp"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

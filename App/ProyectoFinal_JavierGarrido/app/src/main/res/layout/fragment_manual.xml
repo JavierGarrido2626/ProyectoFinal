@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F5F5F5"
     tools:context=".ui.manual.ManualFragment">
 
     <ScrollView
@@ -15,106 +16,185 @@
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#F3E5F5"
-            android:gravity="center"
             android:orientation="vertical"
             android:padding="16dp">
 
-            <TextView
-                android:id="@+id/text_title"
-                android:layout_width="wrap_content"
+            <!-- Manual de Usuario -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:gravity="center"
-                android:text="Manual de Usuario"
-                android:textColor="#800080"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+                app:cardCornerRadius="12dp"
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="#FFFFFF">
 
-            <TextView
-                android:id="@+id/text_manual"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="32dp"
-                android:gravity="center"
-                android:text="Aquí encontrarás el manual de usuario para utilizar la aplicación."
-                android:textColor="#333333"
-                android:textSize="16sp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
 
-            <ImageButton
-                android:id="@+id/btnImgHome"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:background="@null"
-                android:contentDescription="Ir a Home"
-                android:src="@drawable/logocasa" />
+                    <TextView
+                        android:id="@+id/text_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Manual de Usuario"
+                        android:textColor="#4CAF50"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        android:layout_gravity="center" />
 
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:text="En el icono de Home, encontrarás las opciones de Llamar y Alarmas. Para comenzar, el funcionamiento de las alarmas es muy sencillo. Solo tienes que pulsar el botón de Alarmas, lo que te llevará a la aplicación de alarmas del móvil, donde podrás añadir alarmas, cambiar la hora, programarlas, etc. Para volver a Home, solo tienes que presionar la flecha de atrás del móvil. Para la segunda opción de Llamadas, tiene dos opciones. Si pulsas una vez el botón, llamará directamente al teléfono que tengas guardado. Si mantienes pulsado el botón de Llamadas, te permitirá introducir el número de teléfono que quieras, y se guardará."
-                android:textColor="#333333"
-                android:textSize="16sp" />
+                    <TextView
+                        android:id="@+id/text_manual"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center"
+                        android:text="Aquí encontrarás el manual de usuario para utilizar la aplicación."
+                        android:textColor="#424242"
+                        android:textSize="16sp"
+                        android:layout_gravity="center" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
-            <ImageButton
-                android:id="@+id/btnImgUbicaciones"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:background="@null"
-                android:contentDescription="Ir a Ubicaciones"
-                android:src="@drawable/logoubicacion" />
-
-            <TextView
-                android:id="@+id/text_diario"
-                android:layout_width="wrap_content"
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:gravity="center"
-                android:text="En la parte de Ubicación, se encuentran las siguientes funciones. Lo primero que pasa, si es un móvil nuevo, es que pedirá permisos de ubicación y otros permisos. Después de esto, aparecerá un mapa con tu ubicación, el cual podrás mover con el móvil. Si mantienes pulsado el mapa, aparecerá un icono de una flecha, lo que indica que has seleccionado esa ubicación. Además, tienes la opción de ponerle un nombre debajo del mapa, por ejemplo, &quot;CASA&quot;. También tienes dos botones: uno para guardar la ubicación que has seleccionado, y te avisará si se guarda correctamente. El otro botón es para acceder a la lista de ubicaciones guardadas. Si pulsas sobre alguna de esas ubicaciones, te llevará a Google Maps y te mostrará la ruta para llegar allí. Además, si te confundes de ubicación o ya no la necesitas, puedes borrar la ubicación con un botón. Para volver, puedes usar las flechas hacia atrás del móvil, y para regresar a la primera parte con el mapa, solo tienes que pulsar el botón de &quot;Salir&quot;."
-                android:textColor="#333333"
-                android:textSize="16sp" />
+                app:cardCornerRadius="12dp"
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="#FFFFFF">
 
-            <ImageButton
-                android:id="@+id/btnImgDiario"
-                android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <ImageButton
+                        android:id="@+id/btnImgHome"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@null"
+                        android:contentDescription="Ir a Home"
+                        android:src="@drawable/logocasa" />
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="En el icono de Home, encontrarás las opciones de Llamar y Notificaciones. Para usar las notificaciones, se pulsa el botón de Notificaciones, y se crea una con el icono de la campana. Se pone un título, se configura la hora y se seleccionan los días en los que se repetirá.
+
+Para la parte del teléfono, si el usuario no ha insertado ninguno todavía, se puede insertar el que desees. Si el número ya está en uso, aparecerá un mensaje. Si insertas un número y lo quieres cambiar, puedes hacerlo en el segundo texto. Cuando tengas el número de teléfono configurado, das a Realizar llamada, y se realizará automáticamente."
+                        android:textColor="#424242"
+                        android:textSize="16sp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:background="@null"
-                android:contentDescription="Ir a Diario"
-                android:src="@drawable/logodiario" />
+                app:cardCornerRadius="12dp"
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="#FFFFFF">
 
-            <TextView
-                android:id="@+id/text_diarios"
-                android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <ImageButton
+                        android:id="@+id/btnImgUbicaciones"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@null"
+                        android:contentDescription="Ir a Ubicaciones"
+                        android:src="@drawable/logoubicacion" />
+
+                    <TextView
+                        android:id="@+id/text_diario"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="En la parte de Ubicación, aparecerá un mapa donde se debe hacer clic en la ubicación deseada. Aparecerá una flechita, se guarda el nombre de esa ubicación, y al dar en la lista de ubicaciones, se mostrará una lista con las ubicaciones guardadas. Si se pulsa sobre una ubicación, se mostrará la ruta para llegar a ese lugar."
+                        android:textColor="#424242"
+                        android:textSize="16sp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:gravity="center"
-                android:text="En la parte del diario, su funcionamiento es muy sencillo. Se muestran las notas creadas en una lista, donde tienes la opción de filtrarlas utilizando el buscador. También puedes eliminarlas con un botón dedicado. Si mantienes pulsada una nota, tienes la posibilidad de cambiar su color para diferenciarlas. Por ejemplo, puedes asignar el color amarillo a las notas importantes y el azul a las menos importantes. Para insertar una nueva nota, debes pulsar el botón &quot;Insertar nota&quot;. Esto te llevará a otra pantalla donde puedes escribir el título de la nota y su contenido. Una vez completada, se guarda con un botón. Al guardarla, regresarás automáticamente al listado de notas. Las notas se guardan con la fecha y la hora en las que fueron creadas, para facilitar su organización y consulta."
-                android:textColor="#333333"
-                android:textSize="16sp" />
+                app:cardCornerRadius="12dp"
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="#FFFFFF">
 
-            <ImageButton
-                android:id="@+id/btnImgEstadisticas"
-                android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <ImageButton
+                        android:id="@+id/btnImgDiario"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@null"
+                        android:contentDescription="Ir a Diario"
+                        android:src="@drawable/logodiario" />
+
+                    <TextView
+                        android:id="@+id/text_diarios"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="En la parte del Diario, puedes crear notas. Solo tienes que poner el título y el contenido de la nota. Una vez guardada, se mostrará en una lista. Si pulsas sobre la nota, podrás visualizar lo que escribiste y, además, tendrás la opción de borrarla."
+                        android:textColor="#424242"
+                        android:textSize="16sp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:background="@null"
-                android:contentDescription="Ir a Estadísticas"
-                android:src="@drawable/estadisticas" />
+                app:cardCornerRadius="12dp"
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="#FFFFFF">
 
-            <TextView
-                android:id="@+id/text_estadisticas"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:gravity="center"
-                android:text="La sección de Estadísticas te permite visualizar y analizar tus datos registrados. Puedes acceder a gráficos que muestran tendencias, resúmenes por categorías, y comparar tu progreso a lo largo del tiempo. También tienes la opción de exportar tus estadísticas en formato PDF o compartirlas directamente."
-                android:textColor="#333333"
-                android:textSize="16sp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <ImageButton
+                        android:id="@+id/btnImgEstadisticas"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@null"
+                        android:contentDescription="Ir a Estadísticas"
+                        android:src="@drawable/estadisticas" />
+
+                    <TextView
+                        android:id="@+id/text_estadisticas"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="La sección de Estadísticas permite visualizar los datos del usuario sobre los juegos. Selecciona la imagen del juego que deseas consultar y, luego, utiliza los botones (fácil, medio o difícil) para mostrar los datos específicos. Además, podrás exportar los datos al dispositivo móvil."
+                        android:textColor="#424242"
+                        android:textSize="16sp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
         </LinearLayout>
 

@@ -7,20 +7,29 @@ import android.widget.Button;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.proyectofinal_javiergarrido.R;
+import com.example.proyectofinal_javiergarrido.ui.ServiciosServer.ServicioApi;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import android.widget.Toast;
+
 import java.util.List;
 
 public class UbiAdapter extends RecyclerView.Adapter<UbiAdapter.UbicacionViewHolder> {
 
     private List<Ubicacion> ubicaciones;
     private OnItemClickListener listener;
+    private ServicioApi servicioApi;
 
     public interface OnItemClickListener {
         void onItemClick(Ubicacion ubicacion);
     }
 
-    public UbiAdapter(List<Ubicacion> ubicaciones, OnItemClickListener listener) {
+    public UbiAdapter(List<Ubicacion> ubicaciones, OnItemClickListener listener, ServicioApi servicioApi) {
         this.ubicaciones = ubicaciones;
         this.listener = listener;
+        this.servicioApi = servicioApi;
     }
 
     @Override
@@ -32,7 +41,7 @@ public class UbiAdapter extends RecyclerView.Adapter<UbiAdapter.UbicacionViewHol
     @Override
     public void onBindViewHolder(UbicacionViewHolder holder, int position) {
         Ubicacion ubicacion = ubicaciones.get(position);
-        holder.bind(ubicacion, position);
+        holder.bind(ubicacion);
     }
 
     @Override
@@ -51,22 +60,36 @@ public class UbiAdapter extends RecyclerView.Adapter<UbiAdapter.UbicacionViewHol
             btnBorrar = itemView.findViewById(R.id.btnBorrar);
         }
 
-        public void bind(final Ubicacion ubicacion, final int position) {
+        public void bind(final Ubicacion ubicacion) {
             textView.setText(ubicacion.getNombre());
-
-            btnBorrar.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    ubicaciones.remove(position);
-                    notifyItemRemoved(position);
-                    notifyItemRangeChanged(position, ubicaciones.size());
-                }
+            btnBorrar.setOnClickListener(v -> {
+                eliminarUbicacion(ubicacion);
             });
 
-            itemView.setOnClickListener(new View.OnClickListener() {
+            itemView.setOnClickListener(v -> listener.onItemClick(ubicacion));
+        }
+
+        private void eliminarUbicacion(Ubicacion ubicacion) {
+            Call<Void> call = servicioApi.eliminarUbicacion(ubicacion.getId_ubicacion());
+            call.enqueue(new Callback<Void>() {
                 @Override
-                public void onClick(View v) {
-                    listener.onItemClick(ubicacion);
+                public void onResponse(Call<Void> call, Response<Void> response) {
+                    if (response.isSuccessful()) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            ubicaciones.remove(position);
+                            notifyItemRemoved(position);
+                            notifyItemRangeChanged(position, ubicaciones.size());
+                            Toast.makeText(itemView.getContext(), "Ubicación eliminada correctamente", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(itemView.getContext(), "Error al eliminar la ubicación", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Void> call, Throwable t) {
+                    Toast.makeText(itemView.getContext(), "Error de red", Toast.LENGTH_SHORT).show();
                 }
             });
         }

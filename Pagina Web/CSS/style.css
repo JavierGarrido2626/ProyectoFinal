@@ -39,19 +39,20 @@ header {
 
 header nav  {
     color: #ffffff;
-    padding-left: 60px;
     padding-top: 38px;
     font-size: 25px;
     text-decoration: none;
+    width: 40%;
 }
 
 
 header nav a  {
     color: #ffffff;
-    padding-left: 45px;
+    padding-left: 1px;
     padding-top: 38px;
     font-size: 25px;
     text-decoration: none;
+    margin: 30px;
 }
 
 
@@ -78,8 +79,8 @@ header>div:first-child div:first-child {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    width: 200px;
-    padding-left: 55px;
+    width: 50px;
+    padding-left: 45px;
 }
 
 /* Hace referencia al segundo div del primero de la cabecera*/
@@ -612,8 +613,8 @@ footer a:hover {
 }
 
 .nivel {
-    background-color: #4CAF50; /* Color de fondo */
-    color: white; /* Texto en blanco */
+    background-color: #4CAF50; 
+    color: white; 
     border: none;
     border-radius: 8px;
     font-size: 20px;

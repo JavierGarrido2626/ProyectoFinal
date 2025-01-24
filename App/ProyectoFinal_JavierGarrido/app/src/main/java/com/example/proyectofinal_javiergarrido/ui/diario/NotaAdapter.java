@@ -1,116 +1,72 @@
 package com.example.proyectofinal_javiergarrido.ui.diario;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.proyectofinal_javiergarrido.CrearNotaActivity;
 import com.example.proyectofinal_javiergarrido.R;
+import com.example.proyectofinal_javiergarrido.ui.ServiciosServer.ClienteApi;
+import com.example.proyectofinal_javiergarrido.ui.ServiciosServer.ServicioApi;
 
-import java.util.HashMap;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
+import java.util.Locale;
 
 public class NotaAdapter extends RecyclerView.Adapter<NotaAdapter.NotaViewHolder> {
 
     private List<Nota> listaNotas;
-    private BaseDatosDiarioSQL baseDeDatos;
     private Context context;
-
-    private static final Map<String, String> coloresMapa;
-
-    static {
-        coloresMapa = new HashMap<>();
-        coloresMapa.put("rojo", "#FF6B6B");
-        coloresMapa.put("verde", "#A5D6A7");
-        coloresMapa.put("azul", "#90CAF9");
-        coloresMapa.put("amarillo", "#FFF59D");
-        coloresMapa.put("rosa", "#F48FB1");
-        coloresMapa.put("cian", "#B2EBF2");
-        coloresMapa.put("blanco", "#FFFFFF");
-    }
 
     public NotaAdapter(List<Nota> listaNotas, Context context) {
         this.listaNotas = listaNotas;
         this.context = context;
-        this.baseDeDatos = new BaseDatosDiarioSQL(context);
     }
 
     @NonNull
     @Override
     public NotaViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_nota, parent, false);
-        return new NotaViewHolder(itemView);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_nota, parent, false);
+        return new NotaViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull NotaViewHolder holder, int position) {
-        final Nota nota = listaNotas.get(position);
-        holder.tvTitulo.setText(nota.getTitulo());
-        holder.tvContenido.setText(nota.getContenido());
-        holder.tvFecha.setText(nota.getFecha());
+        Nota nota = listaNotas.get(position);
 
-        // Aplicar color de fondo según el color seleccionado
-        if (nota.getColor() != null && !nota.getColor().isEmpty()) {
-            String colorEnHex = coloresMapa.get(nota.getColor().toLowerCase());
-            holder.itemView.setBackgroundColor(
-                    colorEnHex != null ? Color.parseColor(colorEnHex) : Color.TRANSPARENT
-            );
-        } else {
-            holder.itemView.setBackgroundColor(Color.TRANSPARENT);
-        }
-
-        holder.botonEliminar.setOnClickListener(v -> {
-            baseDeDatos.eliminarNota(nota);
-            listaNotas.remove(position);
-            notifyItemRemoved(position);
-            notifyItemRangeChanged(position, listaNotas.size());
-        });
-
-        holder.itemView.setOnLongClickListener(v -> {
-            mostrarDialogoColor(nota, position);
-            return true;
-        });
+        holder.titulo.setText(nota.getTitulo());
+        holder.fecha.setText(formatFecha(nota.getFecha()));
+        holder.colorCard.setCardBackgroundColor(Color.parseColor(nota.getColor()));
 
         holder.itemView.setOnClickListener(v -> {
-            abrirNotaEditar(nota);
+            Intent intent = new Intent(context, DetalleNotaActivity.class);
+            intent.putExtra("titulo", nota.getTitulo());
+            intent.putExtra("contenido", nota.getContenido());
+            intent.putExtra("fecha", formatFecha(nota.getFecha()));
+            context.startActivity(intent);
         });
-    }
 
-    private void mostrarDialogoColor(Nota nota, int posicion) {
-        String[] colores = {"rojo", "verde", "azul", "amarillo", "rosa", "cian", "blanco"};
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("Seleccionar color");
-        builder.setItems(colores, (dialog, which) -> {
-            String colorSeleccionado = colores[which];
-            nota.setColor(colorSeleccionado);
-
-            // Actualizar la base de datos y la lista
-            if (baseDeDatos.actualizarNota(nota)) {
-                listaNotas.set(posicion, nota);
-                notifyDataSetChanged(); // Actualiza la lista completa
+        holder.botonEliminar.setOnClickListener(v -> {
+            int idNota = nota.getIdNota();
+            if (idNota != 0) {
+                eliminarNota(idNota, position);
             }
         });
-        builder.show();
-    }
-
-    private void abrirNotaEditar(Nota nota) {
-        Intent intent = new Intent(context, CrearNotaActivity.class);
-        intent.putExtra("id", nota.getId());
-        intent.putExtra("titulo", nota.getTitulo());
-        intent.putExtra("contenido", nota.getContenido());
-        intent.putExtra("color", nota.getColor());
-        context.startActivity(intent);
     }
 
     @Override
@@ -118,23 +74,60 @@ public class NotaAdapter extends RecyclerView.Adapter<NotaAdapter.NotaViewHolder
         return listaNotas.size();
     }
 
-    static class NotaViewHolder extends RecyclerView.ViewHolder {
-        TextView tvTitulo;
-        TextView tvContenido;
-        TextView tvFecha;
-        Button botonEliminar;
+    public void actualizarLista(List<Nota> listaNotas) {
+        this.listaNotas = listaNotas;
+        notifyDataSetChanged();
+    }
 
-        NotaViewHolder(View itemView) {
-            super(itemView);
-            tvTitulo = itemView.findViewById(R.id.ed_TituloNota);
-            tvContenido = itemView.findViewById(R.id.ed_ContenidoNota);
-            tvFecha = itemView.findViewById(R.id.ed_FechaNota);
-            botonEliminar = itemView.findViewById(R.id.boton_eliminar);
+    private void eliminarNota(int idNota, int position) {
+        Log.d("NotaAdapter", "Enviando ID de la nota para eliminar: " + idNota);
+
+        ServicioApi servicioApi = ClienteApi.getClient().create(ServicioApi.class);
+        Call<Void> call = servicioApi.eliminarNota(idNota);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Log.d("NotaAdapter", "Nota eliminada con éxito");
+                    listaNotas.remove(position);
+                    notifyItemRemoved(position);
+                } else {
+                    Log.e("NotaAdapter", "Error al eliminar nota: " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.e("NotaAdapter", "Error al eliminar nota: " + t.getMessage());
+            }
+        });
+    }
+
+    private String formatFecha(String fecha) {
+        SimpleDateFormat formatoEntrada = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z", Locale.ENGLISH);
+        SimpleDateFormat formatoSalida = new SimpleDateFormat("dd/MM/yyyy", new Locale("es", "ES"));
+
+        try {
+            Date date = formatoEntrada.parse(fecha);
+            return formatoSalida.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return fecha;
         }
     }
 
-    public void actualizarLista(List<Nota> nuevasNotas) {
-        this.listaNotas = nuevasNotas;
-        notifyDataSetChanged();
+    public static class NotaViewHolder extends RecyclerView.ViewHolder {
+
+        TextView titulo, fecha;
+        Button botonEliminar;
+        CardView colorCard;
+
+        public NotaViewHolder(@NonNull View itemView) {
+            super(itemView);
+            titulo = itemView.findViewById(R.id.ed_TituloNota);
+            fecha = itemView.findViewById(R.id.ed_FechaNota);
+            botonEliminar = itemView.findViewById(R.id.boton_eliminar);
+            colorCard = itemView.findViewById(R.id.cardViewNota);
+        }
     }
 }

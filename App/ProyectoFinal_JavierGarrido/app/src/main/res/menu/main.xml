@@ -8,5 +8,15 @@
         app:showAsAction="never" />
     <item
         android:id="@+id/btnCerrarSesion"
-        android:title="Cerrar Sesión" />
+        android:title="Cerrar Sesión"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/btnInformacionMenu"
+        android:title="Información"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/btnGenerarUbicacion"
+        android:icon="@drawable/logoubicacion"
+        android:title="Ubicaciones"
+        app:showAsAction="ifRoom" />
 </menu>

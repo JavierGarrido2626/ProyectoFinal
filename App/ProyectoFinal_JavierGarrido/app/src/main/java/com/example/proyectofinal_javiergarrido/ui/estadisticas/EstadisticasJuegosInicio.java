@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.proyectofinal_javiergarrido.MainActivity;
 import com.example.proyectofinal_javiergarrido.R;
+import com.example.proyectofinal_javiergarrido.ui.estadisticas.Cartas.EstadisticasJuegoCartas;
 import com.example.proyectofinal_javiergarrido.ui.estadisticas.Colores.EstadisticasJuegoColor;
 import com.example.proyectofinal_javiergarrido.ui.estadisticas.Contar.EstadisticasJuegoContar;
 import com.example.proyectofinal_javiergarrido.ui.estadisticas.Trabalenguas.EstadisticasJuegoTrabalenguas;

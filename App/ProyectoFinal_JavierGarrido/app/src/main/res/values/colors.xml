@@ -11,5 +11,7 @@
     <color name="colorNormal">#4CAF50</color>
     <color name="colorPressed">#388E3C</color>
     <color name="colorFocused">#81C784</color>
+    <color name="menu_background">#555555</color>
+    <color name="menu_text_color">#FFFFFF</color>
 
 </resources>

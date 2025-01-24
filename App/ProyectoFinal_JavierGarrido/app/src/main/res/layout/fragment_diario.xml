@@ -4,32 +4,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
+    android:background="#F5F5F5"
     tools:context=".MainActivity">
-
-
 
     <EditText
         android:id="@+id/et_buscar"
-        android:layout_width="370dp"
-        android:layout_height="62dp"
-        android:backgroundTint="@android:color/darker_gray"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/edittext_background"
         android:drawableStart="@android:drawable/ic_menu_search"
+        android:drawablePadding="8dp"
         android:hint="Buscar nota"
         android:padding="12dp"
         android:textColor="#333"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_notas"
-        android:layout_width="376dp"
-        android:layout_height="438dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="374dp"
+        android:layout_height="540dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@id/boton_crear_nota"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/et_buscar"
         app:layout_constraintVertical_bias="0.0" />
@@ -37,14 +41,15 @@
     <Button
         android:id="@+id/boton_crear_nota"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:backgroundTint="@android:color/holo_blue_dark"
-        android:padding="14dp"
-        android:text="Insertar Nota"
+        android:layout_height="60dp"
+        android:layout_margin="16dp"
+        android:backgroundTint="#00A86B"
+        android:text="Crear Nota"
         android:textColor="@android:color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/recycler_view_notas" />
+        app:layout_constraintEnd_toEndOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
