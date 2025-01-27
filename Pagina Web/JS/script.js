@@ -228,7 +228,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 document.addEventListener('DOMContentLoaded', function () {
-    // Se crearn arrays con trabalenguas ya sean faciles , medios o difciles.
     var trabalenguasFaciles = [
         "Tres tristes tigres tragan trigo en un trigal.",
         "Pablito clavó un clavito. ¿Qué clavito clavó Pablito?",
@@ -248,7 +247,6 @@ document.addEventListener('DOMContentLoaded', function () {
         "Si Sansón no sazona su salsa con sal, le sale sosa. ¿Qué salsa sosa le sale a Sansón si no sazona su salsa con sal?"
     ];
 
-    //Se declaran las variables.
     var contenedorTrabalenguas = document.getElementById('contenedor-trabalenguas');
     var botonEmpezar = document.getElementById('botonEmpezar');
     var botonParar = document.getElementById('botonTiempo');
@@ -258,22 +256,23 @@ document.addEventListener('DOMContentLoaded', function () {
     var intervaloTiempo;
     var segundos = 0;
 
-    // Mostrar niveles al hacer clic en el botón "Empezar"
+    botonParar.disabled = true;
+
     botonEmpezar.addEventListener('click', function () {
         listaNiveles.style.display = 'block';
     });
 
-    // Seleccionar nivel y comenzar a contar el tiempo
     document.querySelectorAll('.nivel').forEach(function (boton) {
         boton.addEventListener('click', function (evento) {
+            clearInterval(intervaloTiempo);
             nivelSeleccionado = evento.target.dataset.nivel;
             listaNiveles.style.display = 'none';
             mostrarTrabalenguasAleatorio();
-            iniciarTemporizador();  
+            iniciarTemporizador();
+            botonParar.disabled = false;
         });
     });
 
-    // Función para mostrar un trabalenguas
     function obtenerTrabalenguasPorNivel(nivel) {
         var lista = [];
         if (nivel === "facil") lista = trabalenguasFaciles;
@@ -284,7 +283,6 @@ document.addEventListener('DOMContentLoaded', function () {
         return lista[indiceAleatorio];
     }
 
-    // Mostrar el trabalenguas en el div
     function mostrarTrabalenguasAleatorio() {
         var trabalenguas = obtenerTrabalenguasPorNivel(nivelSeleccionado);
         contenedorTrabalenguas.innerHTML = `
@@ -294,7 +292,6 @@ document.addEventListener('DOMContentLoaded', function () {
         `;
     }
 
-    // Función para iniciar el temporizador
     function iniciarTemporizador() {
         segundos = 0;  
         tiempoP.textContent = `Tiempo: ${segundos}`; 
@@ -304,49 +301,39 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 1000); 
     }
 
-    // Funcion para detener el temporizador.
     botonParar.addEventListener('click', function () {
         clearInterval(intervaloTiempo); 
-        alert(`¡Tiempo detenido! Has tardado ${segundos} segundos en completar el trabalenguas.  Se enviaran las estadísticas.`);
+        botonParar.disabled = true;
+        alert(`¡Tiempo detenido! Has tardado ${segundos} segundos en completar el trabalenguas.  Se enviarán las estadísticas.`);
         enviarDatosAJuegoTrabalenguas(idUsuario, nivelSeleccionado, segundos); 
     });
 
-// Almacenar los datos del usuario (simulando un inicio de sesión)
-const idUsuario = localStorage.getItem('id_usuario');; 
+    const idUsuario = localStorage.getItem('id_usuario');
 
-// Modificar la función para detener el temporizador y enviar datos
-botonParar.addEventListener('click', function () {
-    clearInterval(intervaloTiempo); 
-    enviarDatosAJuegoTrabalenguas(idUsuario, nivelSeleccionado, segundos);
-});
+    function enviarDatosAJuegoTrabalenguas(idUsuario, nivel, tiempoTotal) {
+        const datos = {
+            id_usuario: idUsuario,
+            nivel: nivel,
+            tiempo_total: tiempoTotal
+        };
 
-// Función para enviar datos al backend
-function enviarDatosAJuegoTrabalenguas(idUsuario, nivel, tiempoTotal) {
-    const datos = {
-        id_usuario: idUsuario,
-        nivel: nivel,
-        tiempo_total: tiempoTotal
-    };
-
-    fetch('http://localhost:5000/guardar_estadisticas_trabalenguas', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(datos)
-    })
-        .then(response => response.json())
-        .then(data => {
-            if (data.error) {
-                console.error(`Error al guardar estadísticas: ${data.error}`);
-            } else {
-                console.log('Estadísticas guardadas correctamente:', data.message);
-            }
+        fetch('http://localhost:5000/guardar_estadisticas_trabalenguas', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(datos)
         })
-        .catch(error => console.error('Error al conectar con el backend:', error));
-}
-
-
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    console.error(`Error al guardar estadísticas: ${data.error}`);
+                } else {
+                    console.log('Estadísticas guardadas correctamente:', data.message);
+                }
+            })
+            .catch(error => console.error('Error al conectar con el backend:', error));
+    }
 });
 
 

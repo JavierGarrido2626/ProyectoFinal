@@ -17,9 +17,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (loginMessage) {
                     if (response.ok) {
+                        const data = await response.json();
                         loginMessage.textContent = 'Inicio de sesión exitoso';
                         loginMessage.style.color = 'green';
                         localStorage.setItem('nombreUsuario', nombreUsuario);
+                        localStorage.setItem('id_usuario', data.id_usuario);
                         window.location.href = 'pages/Inicio.html';
                     } else {
                         const data = await response.json();
@@ -28,7 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }
             } catch (error) {
-                console.error('Error:', error);
                 if (loginMessage) {
                     loginMessage.textContent = 'Error al conectar con el servidor.';
                     loginMessage.style.color = 'red';
@@ -98,7 +99,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }
             } catch (error) {
-                console.error('Error:', error);
                 if (registroMessage) {
                     registroMessage.textContent = 'Error al conectar con el servidor.';
                     registroMessage.style.color = 'red';
@@ -108,6 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const nombreUsuario = localStorage.getItem('nombreUsuario');
+    const idUsuario = localStorage.getItem('id_usuario');
     if (nombreUsuario) {
         document.getElementById('nombreUsuarioDisplay').textContent = nombreUsuario;
         const loginLinks = document.getElementById('loginLinks');
@@ -120,6 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (cerrarSesionBtn) {
         cerrarSesionBtn.addEventListener('click', () => {
             localStorage.removeItem('nombreUsuario');
+            localStorage.removeItem('id_usuario');
             window.location.href = '../Index.html';
         });
     }
