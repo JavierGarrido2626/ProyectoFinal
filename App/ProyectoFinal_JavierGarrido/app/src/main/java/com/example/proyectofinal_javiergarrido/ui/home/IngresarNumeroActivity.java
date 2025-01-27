@@ -36,7 +36,6 @@ public class IngresarNumeroActivity extends AppCompatActivity {
     private CountryCodePicker ccp;
     private Button btnGuardarNumero;
     private Button btnSalirTelefono;
-
     private TextView txtNumeroGuardado;
 
     @Override
@@ -96,25 +95,18 @@ public class IngresarNumeroActivity extends AppCompatActivity {
             }
         });
 
-
-
-        btnSalirTelefono.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(IngresarNumeroActivity.this, HomeFragment.class); // Reemplaza 'HomeActivity.class' por la actividad de inicio o home de tu app
-                startActivity(i);
-                finish();         }
+        btnSalirTelefono.setOnClickListener(v -> {
+            Intent i = new Intent(IngresarNumeroActivity.this, HomeFragment.class);
+            startActivity(i);
+            finish();
         });
     }
-
-
 
     private boolean esNumeroValido(String numero) {
         PhoneNumberUtil phoneUtil = PhoneNumberUtil.getInstance();
         try {
             String numeroLimpiado = numero.replaceAll("[^0-9]", "");
             Phonenumber.PhoneNumber phoneNumber = phoneUtil.parse(numero, null);
-
             return phoneUtil.isValidNumber(phoneNumber);
         } catch (Exception e) {
             Log.e("NumeroInvalido", "Error al validar el número", e);
@@ -141,7 +133,6 @@ public class IngresarNumeroActivity extends AppCompatActivity {
 
     private void obtenerNumeroGuardado(int idUsuario) {
         ServicioApi servicioApi = ClienteApi.getClient().create(ServicioApi.class);
-
         Call<ObtenerTelefonoObjeto> call = servicioApi.obtenerNumeroTelefono(idUsuario);
         call.enqueue(new Callback<ObtenerTelefonoObjeto>() {
             @Override
@@ -179,26 +170,25 @@ public class IngresarNumeroActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     Log.d("TelefonoGuardado", "Número guardado correctamente.");
                     ToastPersonalizado.show(IngresarNumeroActivity.this, "Número guardado correctamente.");
+                    Intent resultIntent = new Intent();
+                    resultIntent.putExtra("numeroTelefono", numero);
+                    setResult(RESULT_OK, resultIntent);
                     finish();
                 } else {
                     String errorMessage = "Error desconocido";
-
                     if (response.code() == 400) {
                         try {
                             String errorBody = response.errorBody().string();
                             Log.e("ErrorGuardarTelefono", "Respuesta del error: " + errorBody);
-
                             JSONObject jsonError = new JSONObject(errorBody);
                             String errorDetail = jsonError.getString("error");
                             errorMessage = errorDetail != null ? errorDetail : "Error desconocido";
-
                         } catch (IOException | JSONException e) {
                             Log.e("ErrorGuardarTelefono", "Error al leer el cuerpo del error", e);
                         }
                     } else if (response.code() == 500) {
                         errorMessage = "Ya hay un número registrado, si quieres poner un número nuevo, modifícalo en el texto de abajo.";
                     }
-
                     Log.e("ErrorGuardarTelefono", "Error al guardar el teléfono. Código de respuesta: " + response.code());
                     ToastPersonalizado.show(IngresarNumeroActivity.this, errorMessage);
                 }
@@ -223,6 +213,9 @@ public class IngresarNumeroActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     Log.d("TelefonoActualizado", "Número actualizado correctamente.");
                     ToastPersonalizado.show(IngresarNumeroActivity.this, "Número actualizado correctamente.");
+                    Intent resultIntent = new Intent();
+                    resultIntent.putExtra("numeroTelefono", numero);
+                    setResult(RESULT_OK, resultIntent);
                     finish();
                 } else {
                     String errorMessage = response.message();

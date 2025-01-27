@@ -5,11 +5,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputType;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.proyectofinal_javiergarrido.LoginRegistro.LoginActivity;
@@ -19,7 +17,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-
 import org.json.JSONObject;
 
 public class Ajustes extends AppCompatActivity {
@@ -192,7 +189,6 @@ public class Ajustes extends AppCompatActivity {
         }).start();
     }
 
-
     private void cambiarCorreo() {
         SharedPreferences preferencias = getSharedPreferences(PREFERENCIAS_NOMBRE, MODE_PRIVATE);
         int idUsuario = preferencias.getInt(CLAVE_ID_USUARIO, -1);
@@ -210,7 +206,7 @@ public class Ajustes extends AppCompatActivity {
                 if (!nuevoCorreo.isEmpty() && esCorreoValido(nuevoCorreo)) {
                     actualizarCorreo(idUsuario, nuevoCorreo);
                 } else {
-                    Toast.makeText(this, "Por favor, ingrese un correo electrónico válido. Asegúrese de que contenga '@' y un dominio como '.com'.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "Por favor, ingrese un correo electrónico válido.", Toast.LENGTH_LONG).show();
                 }
             });
 
@@ -256,15 +252,14 @@ public class Ajustes extends AppCompatActivity {
         return correo.matches(patronCorreo);
     }
 
-
     private boolean esNombreUsuarioValido(String nombreUsuario) {
         String patronNombreUsuario = "^[a-zA-Z0-9._%+-]+$";
         return nombreUsuario.matches(patronNombreUsuario) && !nombreUsuario.startsWith(".") && !nombreUsuario.endsWith(".") && !nombreUsuario.contains("..");
     }
+
     private boolean esContrasenaValida(String contrasena) {
         return contrasena.length() >= 6 && contrasena.matches(".*[A-Z].*") && contrasena.matches(".*[0-9].*");
     }
-
 
     private void eliminarCuenta() {
         SharedPreferences preferencias = getSharedPreferences(PREFERENCIAS_NOMBRE, MODE_PRIVATE);
@@ -302,7 +297,14 @@ public class Ajustes extends AppCompatActivity {
                 runOnUiThread(() -> {
                     if (respuesta.isSuccessful()) {
                         Toast.makeText(this, "Cuenta eliminada exitosamente", Toast.LENGTH_SHORT).show();
+
+                        SharedPreferences preferencias = getSharedPreferences(PREFERENCIAS_NOMBRE, MODE_PRIVATE);
+                        SharedPreferences.Editor editor = preferencias.edit();
+                        editor.clear();
+                        editor.apply();
+
                         Intent intent = new Intent(Ajustes.this, LoginActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                         finish();
                     } else {

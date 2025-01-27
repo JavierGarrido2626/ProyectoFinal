@@ -29,8 +29,7 @@ public class HomeFragment extends Fragment {
     private String numeroTelefonoGuardado;
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
         Button btnLlamada = root.findViewById(R.id.btn_llamadas);
@@ -51,7 +50,6 @@ public class HomeFragment extends Fragment {
                 Toast.makeText(getContext(), "No se pudo abrir la lista de alarmas: " + e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-
 
         btnNumero.setOnClickListener(v -> {
             Intent intent = new Intent(getContext(), IngresarNumeroActivity.class);

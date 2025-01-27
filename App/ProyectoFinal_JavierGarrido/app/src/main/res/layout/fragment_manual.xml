@@ -19,14 +19,13 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Manual de Usuario -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="#FFFFFF"
                 app:cardCornerRadius="12dp"
-                app:cardElevation="6dp"
-                app:cardBackgroundColor="#FFFFFF">
+                app:cardElevation="6dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -38,23 +37,23 @@
                         android:id="@+id/text_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:gravity="center"
                         android:text="Manual de Usuario"
                         android:textColor="#4CAF50"
                         android:textSize="24sp"
-                        android:textStyle="bold"
-                        android:layout_gravity="center" />
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/text_manual"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_marginTop="8dp"
                         android:gravity="center"
                         android:text="Aquí encontrarás el manual de usuario para utilizar la aplicación."
                         android:textColor="#424242"
-                        android:textSize="16sp"
-                        android:layout_gravity="center" />
+                        android:textSize="16sp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -62,9 +61,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="#FFFFFF"
                 app:cardCornerRadius="12dp"
-                app:cardElevation="6dp"
-                app:cardBackgroundColor="#FFFFFF">
+                app:cardElevation="6dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -88,7 +87,9 @@
                         android:layout_marginTop="16dp"
                         android:text="En el icono de Home, encontrarás las opciones de Llamar y Notificaciones. Para usar las notificaciones, se pulsa el botón de Notificaciones, y se crea una con el icono de la campana. Se pone un título, se configura la hora y se seleccionan los días en los que se repetirá.
 
-Para la parte del teléfono, si el usuario no ha insertado ninguno todavía, se puede insertar el que desees. Si el número ya está en uso, aparecerá un mensaje. Si insertas un número y lo quieres cambiar, puedes hacerlo en el segundo texto. Cuando tengas el número de teléfono configurado, das a Realizar llamada, y se realizará automáticamente."
+Para la parte del teléfono, si el usuario no ha insertado ninguno todavía, se puede insertar el que desees. Si el número ya está en uso, aparecerá un mensaje. Si insertas un número y lo quieres cambiar, puedes hacerlo en el segundo texto. Cuando tengas el número de teléfono configurado, das a Realizar llamada, y se realizará automáticamente.
+
+Otra opcion es pulsar los tres puntos y cerrar sesión, donde se cierra la sesión y vuelve al login. Ajustes permite cambiar el nombre de usuario, correo o contraseña además de poder eliminar la cuenta. Y un apartado de información de contacto"
                         android:textColor="#424242"
                         android:textSize="16sp" />
                 </LinearLayout>
@@ -98,9 +99,9 @@ Para la parte del teléfono, si el usuario no ha insertado ninguno todavía, se 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="#FFFFFF"
                 app:cardCornerRadius="12dp"
-                app:cardElevation="6dp"
-                app:cardBackgroundColor="#FFFFFF">
+                app:cardElevation="6dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -122,7 +123,9 @@ Para la parte del teléfono, si el usuario no ha insertado ninguno todavía, se 
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:text="En la parte de Ubicación, aparecerá un mapa donde se debe hacer clic en la ubicación deseada. Aparecerá una flechita, se guarda el nombre de esa ubicación, y al dar en la lista de ubicaciones, se mostrará una lista con las ubicaciones guardadas. Si se pulsa sobre una ubicación, se mostrará la ruta para llegar a ese lugar."
+                        android:text="En la parte de Ubicación, aparecerá un mapa donde se debe hacer clic en la ubicación deseada. Aparecerá una flechita, se guarda el nombre de esa ubicación, y al dar en la lista de ubicaciones, se mostrará una lista con las ubicaciones guardadas. Si se pulsa sobre una ubicación, se mostrará la ruta para llegar a ese lugar.
+
+Otra opción de ubicaciones es guardar las ubicaciones en tiempo real del dispositivo en un intervalo del tiempo que selecciones. Lo primero es pulsar el icono del menú de arriba, saldrán varios tiempos, seleccionas uno y cada ese tiempo se envía la ubicación del móvil. Para parar el envío de las ubicaciones, se pulsa otra vez al icono del menú de arriba y se selecciona parar."
                         android:textColor="#424242"
                         android:textSize="16sp" />
                 </LinearLayout>
@@ -132,9 +135,9 @@ Para la parte del teléfono, si el usuario no ha insertado ninguno todavía, se 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="#FFFFFF"
                 app:cardCornerRadius="12dp"
-                app:cardElevation="6dp"
-                app:cardBackgroundColor="#FFFFFF">
+                app:cardElevation="6dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -166,9 +169,9 @@ Para la parte del teléfono, si el usuario no ha insertado ninguno todavía, se 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="#FFFFFF"
                 app:cardCornerRadius="12dp"
-                app:cardElevation="6dp"
-                app:cardBackgroundColor="#FFFFFF">
+                app:cardElevation="6dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
